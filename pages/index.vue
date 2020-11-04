@@ -1,6 +1,6 @@
 <template>
   <main id="container">
-    <div id="left-side" class="bg-green-300 md:w-1/4 md:min-h-screen">LEFT</div>
+    <Sidebar />
     <div id="right-side" class="bg-orange-300 md:flex-grow md:min-h-screen">
       RIGHT
       <ol>
@@ -11,7 +11,12 @@
 </template>
 
 <script>
+import Sidebar from '../components/landing-page/Sidebar';
+
 export default {
+  components: {
+    Sidebar
+  },
   async asyncData({ $axios }) {
     const options = {
       headers: {
@@ -41,6 +46,5 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 </style>
