@@ -1,22 +1,11 @@
 <template>
-  <main id="container">
-    <Sidebar />
-    <div id="right-side" class="bg-orange-300 md:flex-grow md:min-h-screen">
-      RIGHT
-      <ol>
-        <li v-for="peserta in daftar_peserta" :key="peserta._id">{{ peserta.email }}</li>
-      </ol>
-    </div>
-  </main>
+  <div id="right-side" class="bg-orange-300 md:flex-grow md:min-h-screen">
+    <NuxtLink to="/pengisian-biodata">Pengisian Biodata</NuxtLink>
+  </div>
 </template>
 
 <script>
-import Sidebar from '../components/landing-page/Sidebar';
-
 export default {
-  components: {
-    Sidebar
-  },
   async asyncData({ $axios }) {
     const options = {
       headers: {
@@ -31,20 +20,3 @@ export default {
   }
 }
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-#container {
-  width: 100%;
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-</style>
