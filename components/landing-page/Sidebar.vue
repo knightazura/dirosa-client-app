@@ -5,22 +5,28 @@
       <ul>
         <li class="sidebar__content-item">
           <circle-icon size="16" class="center-point"></circle-icon>
-          <div class="content-item__text">Halaman awal</div>
-          <div class="bg-purple-300">&nbsp;</div>
+          <div class="content-item__text ml-2">Halaman awal</div>
+          <div class="py-1">
+            <div class="dashed-line__bottom">&nbsp;</div>
+          </div>
         </li>
         <li class="sidebar__content-item">
           <circle-icon size="16" class="center-point"></circle-icon>
-          <div class="content-item__text">Formulir biodata</div>
-          <div class="bg-purple-300">&nbsp;</div>
+          <div class="content-item__text ml-2">Formulir biodata</div>
+          <div class="py-1">
+            <div class="dashed-line__bottom">&nbsp;</div>
+          </div>
         </li>
         <li class="sidebar__content-item">
           <circle-icon size="16" class="center-point"></circle-icon>
-          <div class="content-item__text">Pemilihan kelas</div>
-          <div class="bg-purple-300"></div>
+          <div class="content-item__text ml-2">Pemilihan kelas</div>
+          <div class="py-1">
+            <div class="dashed-line__bottom">&nbsp;</div>
+          </div>
         </li>
         <li class="sidebar__content-item">
           <circle-icon size="16" class="center-point"></circle-icon>
-          <div class="content-item__text">Selesai</div>
+          <div class="content-item__text ml-2">Selesai</div>
         </li>
       </ul>
     </div>
@@ -51,8 +57,7 @@ ul {
 .sidebar__content-item {
   display: grid;
   grid-template-columns: 24px auto;
-  grid-template-rows: 24px minmax(100px, max-content);
-  margin-bottom: 10px;
+  grid-template-rows: 24px minmax(38px, max-content);
 }
 .content-item__text {
   grid-column-start: 2;
@@ -63,5 +68,11 @@ ul {
 .center-point {
   justify-self: center;
   align-self: center;
+}
+.dashed-line__bottom {
+  background: repeating-linear-gradient(to bottom,white 0,white 20%,transparent 20%,transparent 40%);
+  width: 4px;
+  height: 100%;
+  margin: 0 auto;
 }
 </style>
