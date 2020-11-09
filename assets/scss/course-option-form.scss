@@ -1,0 +1,92 @@
+.form-course-option {
+    @apply mx-auto mt-6;
+    width: 80%;
+}
+.form-course-option,
+.form-course-option__type-section,
+.form-course-option__time-section { @apply flex flex-col }
+
+    .type-section__title,
+    .time-section__title {
+        @apply flex flex-row;
+
+        .type-section__title-text,
+        .time-section__title-text {
+            @apply flex-grow;
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+
+        .type-section__title-text { color: #272727 }
+
+        .time-section__title-text {
+            color: #999999;
+            transition: .2s all cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .time-section__title-text--active { color: #272727 !important }
+        
+        .type-section__title-status,
+        .time-section__title-status { @apply flex-shrink px-2 }
+    }
+
+    .type-section__type-class {
+        @apply flex flex-row mt-3;
+        border-bottom: 1px solid rgba(30,30,30,.27);
+
+        .class-option {
+            @apply flex flex-row flex-grow px-2 py-4;
+        }
+    }
+
+    .form-course-option__private-option-wrapper {
+        @apply flex flex-col mt-3;
+
+        .private-class-option {
+            @apply flex flex-row py-2 mb-3;
+            border: 1px solid rgba(30, 30, 30, .27);
+            border-radius: 7px;
+
+            .private-class-option__icon-wrapper { @apply flex justify-center items-center px-2 }
+
+            .private-class-option__content {
+                @apply flex flex-col;
+
+                .private-class-option__text { @apply font-bold }
+            }
+        }
+    }
+
+        .option__check-icon-wrapper {
+            @apply flex justify-center items-center bg-white rounded-full mr-2;
+            background:
+                radial-gradient(114.95% 100% at 50.49% 0%, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0) 100%),
+                linear-gradient(0deg, #DDF4ED, #DDF4ED);
+            box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 2px 5px 0px rgba(255, 255, 255, 0.07) inset;
+            box-shadow: 0px -1px 2px 0px rgba(0, 0, 0, 0.15) inset;
+            width: 24px;
+            height: 24px;
+            border:1px solid #1A5543;
+        }
+
+        .option__active {
+            background:
+                radial-gradient(114.95% 100% at 50.49% 0%, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0) 100%),
+                linear-gradient(0deg, #1A5543, #1A5543) !important;
+        }
+
+    .form-course-option__program-types-confirmation {
+        @apply flex flex-row justify-end;
+        
+        .program-types-confirmation__button {
+            @apply flex-shrink mt-3 px-3 py-2;
+            background:
+                radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 100%),
+                linear-gradient(0deg, #FFEEDD, #FFEEDD);
+            border: 1px solid rgba(30, 30, 30, .27);
+            border-radius: 5px;
+            box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.17);
+            box-shadow: 0px 2px 5px 0px rgba(255, 255, 255, 0.72) inset;
+            box-shadow: 0px -1px 2px 0px rgba(0, 0, 0, 0.17) inset;
+        }
+    }

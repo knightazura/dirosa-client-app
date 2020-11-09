@@ -1,7 +1,7 @@
 <template>
   <div
     id="right-side"
-    class="md:flex md:flex-grow md:min-h-screen md:justify-center md:items-center"
+    class="md:flex md:flex-grow md:justify-center md:items-center"
   >
     <div class="form-pendaftaran md:w-2/3">
       <FullName v-model="formData.full_name" class="mb-8" />
