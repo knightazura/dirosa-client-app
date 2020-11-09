@@ -1,5 +1,5 @@
 <template>
-  <div id="right-side" class="bg-orange-300 md:flex-grow md:min-h-screen">
+  <div id="right-side" class="md:flex-grow md:min-h-screen">
     <NuxtLink to="/pengisian-biodata">Pengisian Biodata</NuxtLink>
   </div>
 </template>

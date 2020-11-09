@@ -1,0 +1,32 @@
+.text-input {
+    padding: 1rem 1.25rem .75rem;
+    background-color: #F7F8F8;
+    border-radius: 5px;
+    border: 1px solid #909B9D;
+
+    span.label-text { margin-bottom: 50px }
+}
+.icon-rotate-30-deg { transform: rotate(30deg) }
+.icon-rotate-45-deg { transform: rotate(45deg) }
+
+.form-pendaftaran {
+    @apply flex flex-col;
+
+    .form-pendaftaran__text-input {
+        @apply flex flex-col;
+
+        label { @apply flex flex-col }
+    }
+
+    .form-pendaftaran__with-icons {
+        position: relative;
+
+        .form-pendaftaran__icons {
+            position: absolute;
+            top: -20px;
+            right: 0;
+            z-index: -1;
+            transition: all .27s ease;
+        }
+    }
+}
