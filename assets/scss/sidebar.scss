@@ -1,0 +1,99 @@
+#sidebar {
+  display: grid;
+  grid-template-rows: minmax(24px, max-content) auto minmax(64px, max-content);
+  background-color: #2D7C66;
+}
+
+ul {
+  list-style: none;
+}
+
+.sidebar__content-item {
+  display: grid;
+  grid-template-columns: 24px auto;
+  grid-template-rows: 24px minmax(38px, max-content);
+}
+.content-item__text {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+.content-item__text__active {
+  font-weight: 700;
+}
+.circle-item__active {
+  color: #FFEEDD;
+}
+.content-item__text__inactive {
+  color: rgba(255, 255, 255, .6);
+}
+.circle-item__inactive {
+  color: #20624F;
+}
+.stroke-3 {
+  stroke-width: 3;
+}
+.center-point {
+  justify-self: center;
+  align-self: center;
+}
+.dashed-line__bottom {
+  width: 4px;
+  height: 100%;
+  margin: 0 auto;
+  transition: all .17s ease-in-out;
+}
+.dashed-line__active {
+  background: repeating-linear-gradient(to bottom,#FFEEDD 0,#FFEEDD 20%,transparent 20%,transparent 40%);
+}
+.dashed-line__inactive {
+  background: repeating-linear-gradient(to bottom,#20624F 0,#20624F 20%,transparent 20%,transparent 40%);
+}
+
+.contact-us,
+.button-faq {
+  align-self: center;
+  align-items: center;
+}
+.contact-us {
+  background-color: rgba(26, 85, 67, .66);
+  border-top-right-radius: 27px;
+  height: 100%;
+}
+.button-faq button {
+  transition: all .35s ease-in-out;
+  border-width: 1px;
+  border-color:
+    rgba(17, 57, 45, 0.35)
+    rgba(17, 57, 45, 0.35)
+    rgba(17, 57, 45, 0.66);
+  background: radial-gradient(
+      114.95% 100% at 50.49% 0%,
+      rgba(255, 255, 255, 0.11) 0%,
+      rgba(255, 255, 255, 0) 100%), #1A5543;
+  box-shadow:
+    0px 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0px -1px 2px rgba(0, 0, 0, 0.15),
+    inset 0px 2px 5px rgba(255, 255, 255, 0.07);
+  border-radius: 7px;
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+  font-weight: 700;
+}
+.button-faq button:active {
+  background: #1A5543;
+}
+.button-faq button:hover {
+  box-shadow:
+    0px 3px 7px rgba(0, 0, 0, 0.30),
+    inset 0px -1px 2px rgba(0, 0, 0, 0.15),
+    inset 0px 2px 5px rgba(255, 255, 255, 0.07);
+}
+
+/* Transition animation classes */
+.no-mode-fade-enter-active, .no-mode-fade-leave-active {
+  transition: opacity .17s
+}
+.no-mode-fade-enter-from, .no-mode-fade-leave-to {
+  opacity: 0
+}

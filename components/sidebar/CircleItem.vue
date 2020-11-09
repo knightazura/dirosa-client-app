@@ -1,6 +1,6 @@
 <template>
   <transition name="no-mode-fade" mode="out-in">
-    <CheckCircle v-if="activePage == 'finish'"
+    <CheckCircle v-if="state == 'finish'"
       :class="FINISH_CLASSES" fillColor="#FFEEDD" />
 
     <circle-icon v-if="state == 'active'"
@@ -19,16 +19,23 @@
 import CheckCircle from '../icons/CheckCircle'
 import { CircleIcon } from 'vue-feather-icons'
 
-const ACTIVE_CLASSES   = 'circle-item__active center-point stroke-4';
-const FINISH_CLASSES   = 'circle-item__active center-point stroke-4';
-const INACTIVE_CLASSES = 'circle-item__inactive center-point stroke-4';
-
 export default {
   props: {
     state: {
       type: String,
       default: 'inactive',
       required: false
+    }
+  },
+  components: {
+    CheckCircle,
+    CircleIcon
+  },
+  data() {
+    return {
+      ACTIVE_CLASSES  : 'circle-item__active center-point stroke-4',
+      FINISH_CLASSES  : 'circle-item__active center-point stroke-4',
+      INACTIVE_CLASSES: 'circle-item__inactive center-point stroke-4'
     }
   }
 }
