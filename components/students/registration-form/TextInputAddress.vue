@@ -1,6 +1,8 @@
 <template>
   <div class="form-pendaftaran__text-input form-pendaftaran__with-icons">
-    <svg id="form-pendaftaran__address-icon" class="form-pendaftaran__icons"
+    <svg
+      id="form-pendaftaran__address-icon"
+      class="form-pendaftaran__icons"
       width="88"
       height="88"
       viewBox="0 0 88 88"
@@ -50,12 +52,12 @@
       <input
         id="alamat"
         v-bind="$attrs"
-        v-bind:value="value"
+        :value="value"
+        type="text"
+        class="text-input"
         v-on="inputListeners"
         @focus="liftUpIcon('form-pendaftaran__address-icon')"
         @blur="liftDownIcon('form-pendaftaran__address-icon')"
-        type="text"
-        class="text-input"
       />
     </label>
   </div>

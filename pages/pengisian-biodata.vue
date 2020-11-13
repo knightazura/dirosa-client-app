@@ -5,9 +5,24 @@
   >
     <div class="form-pendaftaran md:w-2/3">
       <FullName v-model="formData.full_name" class="mb-8" />
-      
-      <Address v-model="formData.address" class="mb-8" />
-      
+
+      <Address v-model="formData.address.street_name" class="mb-8" />
+
+      <div class="form-pendaftaran__select-input md:w-1/3">
+        <label for="provinsi">
+          <span>Provinsi:</span>
+          <select id="provinsi" v-model="formData.address.province">
+            <option
+              v-for="province in provinces"
+              :key="province.id"
+              :value="province.id"
+            >
+              {{ province.nama }}
+            </option>
+          </select>
+        </label>
+      </div>
+
       <div class="flex flex-row mb-8">
         <CurrentAge v-model="formData.age" />
         <Occupation v-model="formData.occupation" />
@@ -18,28 +33,79 @@
         <Phonenumber v-model="formData.phone_number" />
       </div>
 
-      <div class="flex flex-row">
+      <div class="flex flex-row justify-between mt-4">
         <div class="flex-shrink py-2">
           <NuxtLink to="/">Selamat Datang</NuxtLink>
         </div>
-        <div class="flex flex-grow justify-end py-2">
-          <NuxtLink to="/pemilihan-waktu-belajar">Pemilihan Waktu Belajar</NuxtLink>
+        <div
+          class="flex flex-shrink bg-red-600 text-white justify-end p-2 cursor-pointer"
+          @click="register"
+        >
+          Pemilihan Waktu Belajar
         </div>
+        <!--        <NuxtLink to="/pemilihan-waktu-belajar">-->
+        <!--        </NuxtLink>-->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import FormComponents from '~/components/students/registration-form';
+import ENV from '@/services/env'
+import FormComponents from '~/components/students/registration-form'
 
 export default {
   components: FormComponents,
   data() {
     return {
-      formData: {}
+      provinces: null,
+      formData: {
+        address: {
+          street_name: '',
+        },
+      },
     }
-  }
+  },
+  created() {
+    this.loadArea()
+  },
+  methods: {
+    async register() {
+      this.$nuxt.$loading.start()
+      const formData = {
+        account: {
+          email: 'alfikri.izzuddin@pm.me',
+          password: 'rahasia',
+        },
+        first_name: 'Muhammad Izzuddin',
+        last_name: 'Al Fikri',
+        address: {
+          street_name: 'Jl. Madrasah No.8',
+          city: 'Jakarta Selatan',
+          district: 'Cilandak',
+          sub_district: 'Gandaria Selatan',
+          zipcode: 12420,
+        },
+        age: 29,
+        dpd_area: 'Jakarta Selatan',
+        phone_number: '082296731729',
+        occupation: 'Pegawai Swasta',
+      }
+      const response = await this.$axios.post(
+        ENV.participant.registrationUrl,
+        formData
+      )
+      if (response.status === 201) {
+        this.$nuxt.$loading.finish()
+        this.$nuxt.$router.push('/pemilihan-waktu-belajar')
+      }
+    },
+    loadArea(name = 'province') {
+      this.$axios.get(ENV.area[name]).then((response) => {
+        this.provinces = response.data.provinsi
+      })
+    },
+  },
 }
 </script>
 

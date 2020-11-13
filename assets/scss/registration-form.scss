@@ -12,7 +12,8 @@
 .form-pendaftaran {
     @apply flex flex-col;
 
-    .form-pendaftaran__text-input {
+    .form-pendaftaran__text-input,
+    .form-pendataran__select-input {
         @apply flex flex-col;
 
         label { @apply flex flex-col }
