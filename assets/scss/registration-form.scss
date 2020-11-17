@@ -19,13 +19,27 @@
 .form-pendaftaran {
     @apply flex flex-col;
 
-  .form-pendaftaran__zone-section { @apply flex flex-row }
+    .form-pendaftaran__zone-section {
+        @apply flex flex-col;
+
+        @screen md { @apply flex flex-row }
+    }
 
     .form-pendaftaran__text-input,
     .form-pendaftaran__select-input {
         @apply flex flex-col mb-8;
 
         label { @apply flex flex-col }
+    }
+
+    .form-pendaftaran__select-input {
+        #provinsi,
+        #kota,
+        #kecamatan {
+            @apply rounded px-1 py-2 -mb-4;
+
+            @screen md { @apply py-3 }
+        }
     }
 
     .form-pendaftaran__with-icons {

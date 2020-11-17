@@ -52,7 +52,7 @@
         v-bind="$attrs"
         :value="value"
         type="text"
-        class="text-input"
+        class="text-input -mb-4"
         v-on="inputListeners"
         @focus="liftUpIcon('form-pendaftaran__address-icon')"
         @blur="liftDownIcon('form-pendaftaran__address-icon')"

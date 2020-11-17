@@ -3,16 +3,15 @@
     <div class="form-pendaftaran md:w-2/3">
       <FullName v-model="formData.full_name" class="mb-8" />
 
-      <Address v-model="formData.address.street_name" class="mb-8" />
+      <Address v-model="formData.address.street_name" />
 
       <div class="form-pendaftaran__zone-section w-full">
-        <div class="form-pendaftaran__select-input mr-4">
+        <div class="form-pendaftaran__select-input md:mr-4 md:flex-grow">
           <label for="provinsi">
             <span>Provinsi:</span>
             <select
               id="provinsi"
               v-model="formData.address.province"
-              class="px-2 py-1"
             >
               <option
                 v-for="province in provinces"
@@ -26,10 +25,10 @@
         </div>
 
         <!-- Kota -->
-        <div class="form-pendaftaran__select-input mr-4">
+        <div class="form-pendaftaran__select-input md:mr-4 md:flex-grow">
           <label for="kota">
             <span>Kota/Kabupaten:</span>
-            <select id="kota" v-model="formData.address.city" class="px-2 py-1">
+            <select id="kota" v-model="formData.address.city">
               <option v-for="city in cities" :key="city.id" :value="city.id">
                 {{ city.nama }}
               </option>
@@ -38,13 +37,12 @@
         </div>
 
         <!-- Kecamatan -->
-        <div class="form-pendaftaran__select-input">
+        <div class="form-pendaftaran__select-input md:flex-grow">
           <label for="kecamatan">
             <span>Kecamatan:</span>
             <select
               id="kecamatan"
               v-model="formData.address.district"
-              class="px-2 py-1"
             >
               <option
                 v-for="district in districts"
@@ -63,7 +61,7 @@
         <Occupation v-model="formData.occupation" />
       </div>
 
-      <div class="flex flex-row">
+      <div class="flex flex-col md:flex-row">
         <EmailAddress v-model="formData.account.email" />
         <Phonenumber v-model="formData.phone_number" />
       </div>
