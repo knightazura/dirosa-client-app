@@ -1,9 +1,17 @@
 #container {
-    display: grid;
-    grid-template-columns: 30% auto;
+    @apply flex flex-col;
+    
+    @screen md {
+        display: grid;
+        grid-template-columns: 30% auto;
+    }
 }
 
 #right-side {
-    max-height: 100vh;
-    overflow-y: scroll;
+    @apply px-3 pt-16;
+    @screen md {
+        @apply flex flex-grow justify-center items-center p-0;
+        max-height: 100vh;
+        overflow-y: scroll;
+    }
 }

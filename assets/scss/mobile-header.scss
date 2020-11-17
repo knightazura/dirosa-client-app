@@ -1,0 +1,7 @@
+#mobile-header {
+    @screen md { @apply hidden }
+
+    @apply fixed flex flex-row w-full bg-white py-2 px-3;
+    border-bottom: 1px solid #909090;
+    z-index: 99;
+}

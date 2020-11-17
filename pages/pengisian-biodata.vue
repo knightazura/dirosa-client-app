@@ -1,34 +1,29 @@
 <template>
-  <div
-    id="right-side"
-    class="md:flex md:flex-grow md:justify-center md:items-center"
-  >
+  <div id="right-side">
     <div class="form-pendaftaran md:w-2/3">
       <FullName v-model="formData.full_name" class="mb-8" />
 
       <Address v-model="formData.address.street_name" class="mb-8" />
 
-      <div class="form-pendaftaran__select-input md:w-1/3">
-        <label for="provinsi">
-          <span>Provinsi:</span>
-          <select id="provinsi" v-model="formData.address.province">
-            <option
-              v-for="province in provinces"
-              :key="province.id"
-              :value="province.id"
-            >
-              {{ province.nama }}
-            </option>
-          </select>
-        </label>
+      <div class="form-pendaftaran__select-input form-pendaftaran__area-selector">
+        <label for="provinsi">Provinsi</label>
+        <select id="provinsi" class="px-1 py-3 rounded" v-model="formData.address.province">
+          <option
+            v-for="province in provinces"
+            :key="province.id"
+            :value="province.id"
+          >
+            {{ province.nama }}
+          </option>
+        </select>
       </div>
 
-      <div class="flex flex-row mb-8">
+      <div class="flex flex-col md:flex-row">
         <CurrentAge v-model="formData.age" />
         <Occupation v-model="formData.occupation" />
       </div>
 
-      <div class="flex flex-row">
+      <div class="flex flex-col md:flex-row">
         <EmailAddress v-model="formData.email" />
         <Phonenumber v-model="formData.phone_number" />
       </div>
@@ -55,6 +50,14 @@ import ENV from '@/services/env'
 import FormComponents from '~/components/students/registration-form'
 
 export default {
+  head() {
+    return {
+      title: "Daftar belajar membaca Al-Qur'an DIROSA - Rumah Qur'an Wahdah Islamiyah Jakarta",
+      meta: [
+        { hid: "description", name: "description", content: "Daftar belajar membaca Al-Qur'an untuk orang dewasa metode DIROSA" }
+      ]
+    }
+  },
   components: FormComponents,
   data() {
     return {

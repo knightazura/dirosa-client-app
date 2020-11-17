@@ -1,8 +1,6 @@
 <template>
   <div class="form-pendaftaran__text-input form-pendaftaran__with-icons">
     <svg id="form-pendaftaran__fullname-icon" class="form-pendaftaran__icons"
-      width="88"
-      height="88"
       viewBox="0 0 88 88"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

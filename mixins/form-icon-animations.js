@@ -1,13 +1,13 @@
 var liftIcons = {
   methods: {
-    liftUpIcon(iconID, customStyle = { degree: '-30-deg', topPosition: '-35px' }) {
+    liftUpIcon(iconID, customStyle = { degree: '-30-deg' }) {
       const svgIcon = document.getElementById(iconID);
-      svgIcon.style.top = customStyle.topPosition;
+      svgIcon.classList.add('icon-lift-up');
       svgIcon.classList.add(`icon-rotate${customStyle.degree}`);
     },
-    liftDownIcon(iconID, customStyle = { degree: '-30-deg', topPosition: '-20px' }) {
+    liftDownIcon(iconID, customStyle = { degree: '-30-deg' }) {
       const svgIcon = document.getElementById(iconID);
-      svgIcon.style.top = customStyle.topPosition;
+      svgIcon.classList.remove('icon-lift-up');
       svgIcon.classList.remove(`icon-rotate${customStyle.degree}`);
     }
   }

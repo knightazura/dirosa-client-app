@@ -1,7 +1,12 @@
 #sidebar {
-  display: grid;
-  grid-template-rows: minmax(24px, max-content) auto minmax(64px, max-content);
-  background-color: #2D7C66;
+  @apply hidden;
+  
+  @screen md {
+    @apply h-screen bg-green-300;
+    display: grid;
+    grid-template-rows: minmax(24px, max-content) auto minmax(64px, max-content);
+    background-color: #2D7C66;
+  }
 }
 
 ul {
