@@ -33,15 +33,14 @@ export default {
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build',
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
+    '@nuxt/typescript-build', // https://go.nuxtjs.dev/typescript
+    '@nuxtjs/tailwindcss', // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/dotenv'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
+    '@nuxtjs/device',
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxt/content',
