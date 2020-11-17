@@ -19,6 +19,8 @@
 .form-pendaftaran {
     @apply flex flex-col;
 
+  .form-pendaftaran__zone-section { @apply flex flex-row }
+
     .form-pendaftaran__text-input,
     .form-pendaftaran__select-input {
         @apply flex flex-col mb-8;

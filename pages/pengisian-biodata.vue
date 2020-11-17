@@ -5,17 +5,57 @@
 
       <Address v-model="formData.address.street_name" class="mb-8" />
 
-      <div class="form-pendaftaran__select-input form-pendaftaran__area-selector">
-        <label for="provinsi">Provinsi</label>
-        <select id="provinsi" class="px-1 py-3 rounded" v-model="formData.address.province">
-          <option
-            v-for="province in provinces"
-            :key="province.id"
-            :value="province.id"
-          >
-            {{ province.nama }}
-          </option>
-        </select>
+      <div class="form-pendaftaran__zone-section w-full">
+        <div class="form-pendaftaran__select-input mr-4">
+          <label for="provinsi">
+            <span>Provinsi:</span>
+            <select
+              id="provinsi"
+              v-model="formData.address.province"
+              class="px-2 py-1"
+            >
+              <option
+                v-for="province in provinces"
+                :key="province.id"
+                :value="province.id"
+              >
+                {{ province.nama }}
+              </option>
+            </select>
+          </label>
+        </div>
+
+        <!-- Kota -->
+        <div class="form-pendaftaran__select-input mr-4">
+          <label for="kota">
+            <span>Kota/Kabupaten:</span>
+            <select id="kota" v-model="formData.address.city" class="px-2 py-1">
+              <option v-for="city in cities" :key="city.id" :value="city.id">
+                {{ city.nama }}
+              </option>
+            </select>
+          </label>
+        </div>
+
+        <!-- Kecamatan -->
+        <div class="form-pendaftaran__select-input">
+          <label for="kecamatan">
+            <span>Kecamatan:</span>
+            <select
+              id="kecamatan"
+              v-model="formData.address.district"
+              class="px-2 py-1"
+            >
+              <option
+                v-for="district in districts"
+                :key="district.id"
+                :value="district.id"
+              >
+                {{ district.nama }}
+              </option>
+            </select>
+          </label>
+        </div>
       </div>
 
       <div class="flex flex-col md:flex-row">
@@ -23,8 +63,8 @@
         <Occupation v-model="formData.occupation" />
       </div>
 
-      <div class="flex flex-col md:flex-row">
-        <EmailAddress v-model="formData.email" />
+      <div class="flex flex-row">
+        <EmailAddress v-model="formData.account.email" />
         <Phonenumber v-model="formData.phone_number" />
       </div>
 
@@ -62,50 +102,58 @@ export default {
   data() {
     return {
       provinces: null,
+      cities: null,
+      districts: null,
       formData: {
+        account: {},
         address: {
           street_name: '',
         },
       },
     }
   },
+  watch: {
+    'formData.address.province'(newProvince) {
+      this.loadArea('cities', newProvince)
+    },
+    'formData.address.city'(newCity) {
+      this.loadArea('districts', newCity)
+    },
+  },
   created() {
     this.loadArea()
   },
   methods: {
     async register() {
+      this.formData.account.password = 'dirosa_' + this.formData.phone_number
+      console.log(this.formData)
       this.$nuxt.$loading.start()
-      const formData = {
-        account: {
-          email: 'alfikri.izzuddin@pm.me',
-          password: 'rahasia',
-        },
-        first_name: 'Muhammad Izzuddin',
-        last_name: 'Al Fikri',
-        address: {
-          street_name: 'Jl. Madrasah No.8',
-          city: 'Jakarta Selatan',
-          district: 'Cilandak',
-          sub_district: 'Gandaria Selatan',
-          zipcode: 12420,
-        },
-        age: 29,
-        dpd_area: 'Jakarta Selatan',
-        phone_number: '082296731729',
-        occupation: 'Pegawai Swasta',
-      }
       const response = await this.$axios.post(
         ENV.participant.registrationUrl,
-        formData
+        this.formData
       )
       if (response.status === 201) {
         this.$nuxt.$loading.finish()
         this.$nuxt.$router.push('/pemilihan-waktu-belajar')
       }
     },
-    loadArea(name = 'province') {
-      this.$axios.get(ENV.area[name]).then((response) => {
-        this.provinces = response.data.provinsi
+    loadArea(name = 'provinces', id = null) {
+      let responseName = 'provinsi'
+      const url = id ? ENV.area[name] + id : ENV.area[name]
+
+      switch (name) {
+        case 'cities':
+          responseName = 'kota_kabupaten'
+          break
+        case 'districts':
+          responseName = 'kecamatan'
+          break
+        case 'subDistricts':
+          responseName = 'kabupaten'
+          break
+      }
+      this.$axios.get(url).then((response) => {
+        this[name] = response.data[responseName]
       })
     },
   },
