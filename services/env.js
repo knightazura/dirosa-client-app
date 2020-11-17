@@ -3,12 +3,12 @@ const AREA_ADMINISTRATION = process.env.ADMINISTRATION_AREA_API
 
 export default {
   participant: {
-    registrationUrl: BASE_URL + process.env.URL_PARTICIPANT_REGISTRATION,
+    registrationUrl: BASE_URL + process.env.PARTICIPANT_REGISTRATION_URL,
   },
   area: {
-    province: AREA_ADMINISTRATION + process.env.PROVINCE_URL,
-    city: AREA_ADMINISTRATION + process.env.CITY_URL,
-    district: AREA_ADMINISTRATION + process.env.DISTRICT_URL,
-    subDistrict: AREA_ADMINISTRATION + process.env.SUBDISTRICT_URL,
+    provinces: AREA_ADMINISTRATION + process.env.PROVINCE_URL,
+    cities: AREA_ADMINISTRATION + process.env.CITY_URL,
+    districts: AREA_ADMINISTRATION + process.env.DISTRICT_URL,
+    subDistricts: AREA_ADMINISTRATION + process.env.SUBDISTRICT_URL,
   },
 }
