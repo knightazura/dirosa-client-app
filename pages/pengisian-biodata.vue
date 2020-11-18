@@ -134,16 +134,35 @@ export default {
     async register() {
       this.formData.account.password = 'dirosa_' + this.formData.phone_number
       this.$nuxt.$loading.start()
-      const response = await this.$axios.post(
-        ENV.participant.registrationUrl,
-        this.formData
-      )
-      if (response.status === 201) {
-        // from mixins@Session
-        this.commitSession({ rg: true })
 
-        this.$nuxt.$loading.finish()
-        this.$nuxt.$router.push('/pemilihan-waktu-belajar')
+      try {
+        const response = await this.$axios.post(
+          ENV.participant.registrationUrl,
+          this.formData
+        )
+        if (response.status === 201) {
+          // from mixins@Session
+          this.commitSession({ rg: true })
+  
+          this.$nuxt.$loading.finish()
+          this.$nuxt.$router.push('/pemilihan-waktu-belajar')
+        }
+      } catch (error) {
+        console.log({error})
+        this.$toast.error(
+          'Oops.. Maaf ada kesalahan ketika anda ingin mendaftar',
+          {
+            duration: 4500,
+            theme: 'bubble',
+            closeOnSwipe: true,
+            containerClass: 'mt-2',
+            className: 'mx-3 py-2',
+            action: {
+              text: 'Tutup',
+              onClick: (e, toastObject) => toastObject.goAway(0)
+            }
+          }
+        )
       }
     },
     
