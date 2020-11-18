@@ -16,7 +16,7 @@
               <option
                 v-for="province in provinces"
                 :key="province.id"
-                :value="province.id"
+                :value="{id: province.id, name: province.nama}"
               >
                 {{ province.nama }}
               </option>
@@ -29,7 +29,10 @@
           <label for="kota">
             <span>Kota/Kabupaten:</span>
             <select id="kota" v-model="formData.address.city">
-              <option v-for="city in cities" :key="city.id" :value="city.id">
+              <option
+                v-for="city in cities"
+                :key="city.id"
+                :value="{id: city.id, name: city.nama}">
                 {{ city.nama }}
               </option>
             </select>
