@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import Session from '@/mixins/session'
+
 export default {
   async asyncData({ $axios }) {
     const options = {
@@ -17,6 +19,11 @@ export default {
     let a = await $axios.$get("http://localhost:3030/peserta", options)
 
     return { daftar_peserta: a.data };
-  }
+  },
+  mixins: [Session],
+  mounted() {
+    // from mixins@Session
+    this.setupCurrentSession()
+  },
 }
 </script>

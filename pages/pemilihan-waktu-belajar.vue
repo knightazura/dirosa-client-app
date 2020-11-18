@@ -318,12 +318,19 @@
 </template>
 
 <script>
+import Session from '@/mixins/session'
 import { AlertCircleIcon } from 'vue-feather-icons'
 import CourseSchedules from '../components/students/course-options/CourseSchedules'
 
 export default {
   components: {
-    AlertCircleIcon
+    AlertCircleIcon,
+    CourseSchedules
+  },
+  mixins: [Session],
+  mounted() {
+    // from mixins@Session
+    this.setupCurrentSession()
   },
   data() {
     return {
@@ -351,6 +358,9 @@ export default {
       },
       time: {
         frequency: 1
+      },
+      formData: {
+        learning_schedule: null
       }
     }
   }

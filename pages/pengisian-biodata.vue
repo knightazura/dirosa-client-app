@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import Session from '@/mixins/session'
 import ENV from '@/services/env'
 import FormComponents from '~/components/students/registration-form'
 
@@ -100,6 +101,7 @@ export default {
     }
   },
   components: FormComponents,
+  mixins: [Session],
   data() {
     return {
       provinces: null,
@@ -124,23 +126,30 @@ export default {
   created() {
     this.loadArea()
   },
+  mounted() {
+    // from mixins@Session
+    this.setupCurrentSession()
+  },
   methods: {
     async register() {
       this.formData.account.password = 'dirosa_' + this.formData.phone_number
-      console.log(this.formData)
       this.$nuxt.$loading.start()
       const response = await this.$axios.post(
         ENV.participant.registrationUrl,
         this.formData
       )
       if (response.status === 201) {
+        // from mixins@Session
+        this.commitSession({ rg: true })
+
         this.$nuxt.$loading.finish()
         this.$nuxt.$router.push('/pemilihan-waktu-belajar')
       }
     },
-    loadArea(name = 'provinces', id = null) {
+    
+    loadArea(name = 'provinces', place = null) {
       let responseName = 'provinsi'
-      const url = id ? ENV.area[name] + id : ENV.area[name]
+      const url = place ? ENV.area[name] + place.id : ENV.area[name]
 
       switch (name) {
         case 'cities':
