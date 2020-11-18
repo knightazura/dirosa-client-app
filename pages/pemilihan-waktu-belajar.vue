@@ -261,6 +261,7 @@
 
         <!-- Form -->
         <div
+          v-if="type.fillStatus"
           :class="[
             'time-section__form',
             !type.fillStatus ? 'hidden' : ''
@@ -298,6 +299,15 @@
 
           </div>
 
+          <!-- Schedule selector -->
+          <CourseSchedules
+            v-model="formData.learning_schedule"
+            :frequency="time.frequency"
+            :implementation="type.implementation" />
+
+          <!-- Register!! -->
+          <button class="time-section__register-button">Daftar</button>
+
         </div>
       </div>
 
@@ -309,6 +319,7 @@
 
 <script>
 import { AlertCircleIcon } from 'vue-feather-icons'
+import CourseSchedules from '../components/students/course-options/CourseSchedules'
 
 export default {
   components: {
