@@ -1,7 +1,11 @@
 .form-course-option {
-    @apply mx-auto mt-6;
-    width: 80%;
+    @screen md {
+        @apply mx-auto mt-6 p-0;
+        width: 80%;
+    }
 }
+
+// Flex column
 .form-course-option,
 .form-course-option__type-section,
 .form-course-option__time-section { @apply flex flex-col }
@@ -29,16 +33,17 @@
         .time-section__title-status { @apply flex-shrink px-2 }
     }
 
-    .type-section__type-class {
-        @apply flex flex-row mt-3;
-        border-bottom: 1px solid rgba(30,30,30,.27);
 
-        .class-option {
-            @apply flex flex-row flex-grow px-2 py-4;
-        }
+    .type-section__type-class { @apply flex flex-row mt-3 }
+
+
+    .type-section__classical-info {
+        @apply flex flex-row text-sm items-center;
+        margin-top: 12px;
     }
 
-    .form-course-option__private-option-wrapper {
+
+    .type-section__private-option-wrapper {
         @apply flex flex-col mt-3;
 
         .private-class-option {
@@ -55,6 +60,33 @@
             }
         }
     }
+
+
+    .type-section__implementation-option-wrapper {
+        @apply flex flex-col mt-3;
+
+        h3.implementation-option__title {
+            @apply font-bold;
+        }
+
+        .implementation-options {
+            @apply flex flex-row;
+        }
+    }
+
+        .class-option {
+            @apply flex flex-row flex-grow p-2;
+
+            @screen md { @apply px-2 py-4 }
+        }
+
+        .frequency-option { @apply my-1 }
+
+        .class-option__active {
+            box-shadow: 0 2px 7px rgba(0,0,0,.11);
+            border: 1px solid #153E31;
+            border-radius: 3px;
+        }
 
         .option__check-icon-wrapper {
             @apply flex justify-center items-center bg-white rounded-full mr-2;
@@ -75,7 +107,8 @@
                 linear-gradient(0deg, #1A5543, #1A5543) !important;
         }
 
-    .form-course-option__program-types-confirmation {
+        
+    .type-section__program-types-confirmation {
         @apply flex flex-row justify-end;
         
         .program-types-confirmation__button {
@@ -90,3 +123,33 @@
             box-shadow: 0px -1px 2px 0px rgba(0, 0, 0, 0.17) inset;
         }
     }
+
+
+    .type-section__summary { @apply text-sm mb-3 }
+
+
+
+
+
+    .time-section__form {
+        
+        .time-section__learning-frequency { @apply flex flex-col }
+    }
+
+
+
+
+
+.slide-fade-enter-active {
+    transition: all .3s ease;
+}
+
+.slide-fade-leave-active {
+    transition: all .2357s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+}

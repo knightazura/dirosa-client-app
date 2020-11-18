@@ -47,7 +47,7 @@
               <option
                 v-for="district in districts"
                 :key="district.id"
-                :value="district.id"
+                :value="{id: district.id, name: district.nama}"
               >
                 {{ district.nama }}
               </option>
