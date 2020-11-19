@@ -1,5 +1,7 @@
 <template>
-  <div class="md:w-1/3 form-pendaftaran__text-input form-pendaftaran__with-icons">
+  <div
+    class="md:w-1/3 form-pendaftaran__text-input form-pendaftaran__with-icons"
+  >
     <svg
       id="form-pendaftaran__calendar-icon"
       class="form-pendaftaran__icons"
@@ -58,12 +60,12 @@
       <input
         id="umur"
         v-bind="$attrs"
-        v-bind:value="value"
+        :value="value"
+        type="text"
+        class="text-input"
         v-on="inputListeners"
         @focus="liftUpIcon('form-pendaftaran__calendar-icon')"
         @blur="liftDownIcon('form-pendaftaran__calendar-icon')"
-        type="text"
-        class="text-input"
       />
     </label>
   </div>

@@ -22,7 +22,7 @@
     .form-pendaftaran__zone-section {
         @apply flex flex-col;
 
-        @screen md { @apply flex flex-row }
+        @screen lg { @apply flex flex-row }
     }
 
     .form-pendaftaran__text-input,
@@ -65,7 +65,7 @@
     // Address components
     .form-pendaftaran__area-selector {
         @apply w-full;
-        
+
         @screen md {
             @apply .w-1/3;
         }

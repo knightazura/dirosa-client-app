@@ -1,6 +1,6 @@
 <template>
   <div
-    class="md:w-2/3 md:ml-4 form-pendaftaran__text-input form-pendaftaran__with-icons"
+    class="md:pl-2 md:w-2/3 lg:ml-4 lg:pl-0 form-pendaftaran__text-input form-pendaftaran__with-icons"
   >
     <svg
       id="form-pendaftaran__pen-tool-icon"
@@ -50,12 +50,16 @@
       <input
         id="pekerjaan"
         v-bind="$attrs"
-        v-bind:value="value"
-        v-on="inputListeners"
-        @focus="liftUpIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })"
-        @blur="liftDownIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })"
+        :value="value"
         type="text"
         class="text-input"
+        v-on="inputListeners"
+        @focus="
+          liftUpIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })
+        "
+        @blur="
+          liftDownIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })
+        "
       />
     </label>
   </div>

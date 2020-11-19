@@ -1,5 +1,7 @@
 <template>
-  <div class="md:w-2/3 md:mr-4 form-pendaftaran__text-input form-pendaftaran__with-icons">
+  <div
+    class="md:w-1/2 md:pr-1 lg:w-2/3 lg:mr-4 lg:pr-0 form-pendaftaran__text-input form-pendaftaran__with-icons"
+  >
     <svg
       id="form-pendaftaran__email-icon"
       class="form-pendaftaran__icons"
@@ -42,12 +44,12 @@
       <input
         id="email"
         v-bind="$attrs"
-        v-bind:value="value"
+        :value="value"
+        type="text"
+        class="text-input"
         v-on="inputListeners"
         @focus="liftUpIcon('form-pendaftaran__email-icon')"
         @blur="liftDownIcon('form-pendaftaran__email-icon')"
-        type="text"
-        class="text-input"
       />
     </label>
   </div>

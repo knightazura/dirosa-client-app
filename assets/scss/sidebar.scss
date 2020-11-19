@@ -1,12 +1,20 @@
 #sidebar {
   @apply hidden;
-  
+
   @screen md {
-    @apply h-screen bg-green-300;
+    @apply h-screen;
+    background-color: $primaryGreen;
     display: grid;
     grid-template-rows: minmax(24px, max-content) auto minmax(64px, max-content);
-    background-color: #2D7C66;
   }
+
+  @screen xl {
+    grid-template-columns: auto max(380px);
+  }
+}
+
+#sidebar > * {
+  grid-column: 2;
 }
 
 ul {
@@ -62,9 +70,21 @@ ul {
   align-items: center;
 }
 .contact-us {
-  background-color: rgba(26, 85, 67, .66);
-  border-top-right-radius: 27px;
+  @apply text-white flex flex-row pl-5 py-3 w-full;
   height: 100%;
+
+  @screen lg {
+    @apply py-0 w-2/3;
+    background-color: rgba(26, 85, 67, .66);
+    border-top-right-radius: 27px;
+  }
+
+  @screen xl { @apply bg-transparent }
+}
+.button-faq {
+  @apply w-1/3 mb-4 flex justify-center;
+
+  @screen lg { @apply mb-0 }
 }
 .button-faq button {
   transition: all .35s ease-in-out;

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="md:w-1/3 form-pendaftaran__text-input form-pendaftaran__with-icons"
+    class="md:w-1/2 md:pl-1 lg:w-1/3 lg:pl-0 form-pendaftaran__text-input form-pendaftaran__with-icons"
   >
     <svg
       id="form-pendaftaran__smartphone-icon"
@@ -51,12 +51,12 @@
       <input
         id="nomor-hp"
         v-bind="$attrs"
-        v-bind:value="value"
+        :value="value"
+        type="text"
+        class="text-input"
         v-on="inputListeners"
         @focus="liftUpIcon('form-pendaftaran__smartphone-icon')"
         @blur="liftDownIcon('form-pendaftaran__smartphone-icon')"
-        type="text"
-        class="text-input"
       />
     </label>
   </div>
