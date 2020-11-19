@@ -6,17 +6,14 @@
       <Address v-model="formData.address.street_name" />
 
       <div class="form-pendaftaran__zone-section w-full">
-        <div class="form-pendaftaran__select-input md:mr-4 md:flex-grow">
+        <div class="form-pendaftaran__select-input flex-grow lg:w-1/3 lg:pr-2">
           <label for="provinsi">
             <span>Provinsi:</span>
-            <select
-              id="provinsi"
-              v-model="formData.address.province"
-            >
+            <select id="provinsi" v-model="formData.address.province">
               <option
                 v-for="province in provinces"
                 :key="province.id"
-                :value="{id: province.id, name: province.nama}"
+                :value="{ id: province.id, name: province.nama }"
               >
                 {{ province.nama }}
               </option>
@@ -25,14 +22,15 @@
         </div>
 
         <!-- Kota -->
-        <div class="form-pendaftaran__select-input md:mr-4 md:flex-grow">
+        <div class="form-pendaftaran__select-input flex-grow lg:w-1/3 lg:pr-2">
           <label for="kota">
             <span>Kota/Kabupaten:</span>
             <select id="kota" v-model="formData.address.city">
               <option
                 v-for="city in cities"
                 :key="city.id"
-                :value="{id: city.id, name: city.nama}">
+                :value="{ id: city.id, name: city.nama }"
+              >
                 {{ city.nama }}
               </option>
             </select>
@@ -40,17 +38,14 @@
         </div>
 
         <!-- Kecamatan -->
-        <div class="form-pendaftaran__select-input md:flex-grow">
+        <div class="form-pendaftaran__select-input flex-grow lg:w-1/3">
           <label for="kecamatan">
             <span>Kecamatan:</span>
-            <select
-              id="kecamatan"
-              v-model="formData.address.district"
-            >
+            <select id="kecamatan" v-model="formData.address.district">
               <option
                 v-for="district in districts"
                 :key="district.id"
-                :value="{id: district.id, name: district.nama}"
+                :value="{ id: district.id, name: district.nama }"
               >
                 {{ district.nama }}
               </option>
@@ -92,14 +87,6 @@ import ENV from '@/services/env'
 import FormComponents from '~/components/students/registration-form'
 
 export default {
-  head() {
-    return {
-      title: "Daftar belajar membaca Al-Qur'an DIROSA - Rumah Qur'an Wahdah Islamiyah Jakarta",
-      meta: [
-        { hid: "description", name: "description", content: "Daftar belajar membaca Al-Qur'an untuk orang dewasa metode DIROSA" }
-      ]
-    }
-  },
   components: FormComponents,
   mixins: [Session],
   data() {
@@ -143,12 +130,12 @@ export default {
         if (response.status === 201) {
           // from mixins@Session
           this.commitSession({ rg: true })
-  
+
           this.$nuxt.$loading.finish()
           this.$nuxt.$router.push('/pemilihan-waktu-belajar')
         }
       } catch (error) {
-        console.log({error})
+        console.log({ error })
         this.$toast.error(
           'Oops.. Maaf ada kesalahan ketika anda ingin mendaftar',
           {
@@ -159,13 +146,13 @@ export default {
             className: 'mx-3 py-2',
             action: {
               text: 'Tutup',
-              onClick: (e, toastObject) => toastObject.goAway(0)
-            }
+              onClick: (e, toastObject) => toastObject.goAway(0),
+            },
           }
         )
       }
     },
-    
+
     loadArea(name = 'provinces', place = null) {
       let responseName = 'provinsi'
       const url = place ? ENV.area[name] + place.id : ENV.area[name]
@@ -185,6 +172,20 @@ export default {
         this[name] = response.data[responseName]
       })
     },
+  },
+  head() {
+    return {
+      title:
+        "Daftar belajar membaca Al-Qur'an DIROSA - Rumah Qur'an Wahdah Islamiyah Jakarta",
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            "Daftar belajar membaca Al-Qur'an untuk orang dewasa metode DIROSA",
+        },
+      ],
+    }
   },
 }
 </script>

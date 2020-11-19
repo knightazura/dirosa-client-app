@@ -28,7 +28,7 @@
             transition: .2s all cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         .time-section__title-text--active { color: #272727 !important }
-        
+
         .type-section__title-status,
         .time-section__title-status { @apply flex-shrink px-2 }
     }
@@ -107,10 +107,10 @@
                 linear-gradient(0deg, #1A5543, #1A5543) !important;
         }
 
-        
+
     .type-section__program-types-confirmation {
         @apply flex flex-row justify-end;
-        
+
         .program-types-confirmation__button {
             @apply flex-shrink mt-3 px-3 py-2;
             background:
@@ -136,7 +136,23 @@
 
         .time-section__learning-frequency { @apply flex flex-col }
 
-        .time-section__schedule-selector { @apply flex flex-col mt-2 }
+        .time-section__schedule-selector {
+          @apply flex flex-col mt-2;
+
+          .schedule-selector__title { @apply font-bold }
+
+          .schedule-selector__item {
+            @apply py-1 my-3 border border-gray-400 rounded;
+
+            .item-content {
+              @apply flex flex-col px-1 text-center;
+
+              .item-content__time { @apply text-sm }
+            }
+          }
+
+          .schedule-selector__item__selected { @apply border-green-600 shadow }
+        }
 
         .schedule--full { @apply px-3 py-4 justify-center items-center }
 

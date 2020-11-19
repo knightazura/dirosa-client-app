@@ -1,6 +1,6 @@
 <template>
   <div id="mobile-header">
-    <NuxtLink v-if="$route.name !== 'index'" :to='headerProps.backRoute'>
+    <NuxtLink v-if="$route.name !== 'index'" :to="headerProps.backRoute">
       <arrow-left-icon></arrow-left-icon>
     </NuxtLink>
     <h1>{{ headerProps.title }}</h1>
@@ -19,13 +19,10 @@ export default {
       switch (this.$route.name) {
         case 'pengisian-biodata':
           return { title: 'Pengisian Biodata', backRoute: '/' }
-          break
         case 'pemilihan-waktu-belajar':
           return { title: 'Pemilihan Kelas', backRoute: '/pengisian-biodata' }
-          break
         default:
           return { title: "Rumah Qur'an Wahdah Islamiyah" }
-          break
       }
     },
   },
