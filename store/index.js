@@ -4,14 +4,16 @@ export const state = () => ({
     // registered
     rg: false,
     // last page
-    lp: 'index'
-  }
+    lp: 'index',
+    // candidate_id
+    c: null,
+  },
 })
 
 export const getters = {
   hasBeenRegister(state) {
     return state.s.rg
-  }
+  },
 }
 
 export const mutations = {
@@ -21,7 +23,14 @@ export const mutations = {
     const session = JSON.stringify(state.s)
     localStorage.setItem('session', session)
   },
-  REGISTER_SUCCESS(state) {
-    state.s.rg = true
-  }
+  CLEAR_SESSION(state) {
+    state.s = Object.assign(
+      {},
+      {
+        rg: false,
+        lp: 'index',
+        c: null,
+      }
+    )
+  },
 }

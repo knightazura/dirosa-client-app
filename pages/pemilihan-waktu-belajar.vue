@@ -401,13 +401,18 @@
 
           <!-- Schedule selector -->
           <CourseSchedules
-            v-model="formData.learning_schedule"
+            v-model="selected_schedule"
             :frequency="time.frequency"
             :implementation="type.implementation"
           />
 
           <!-- Register!! -->
-          <button class="time-section__register-button">Daftar</button>
+          <button
+            class="time-section__register-button"
+            @click="candidateRegister"
+          >
+            Daftar
+          </button>
         </div>
       </div>
 
@@ -420,6 +425,7 @@
 <script>
 import Session from '@/mixins/session'
 import { AlertCircleIcon } from 'vue-feather-icons'
+import ENV from '@/services/env'
 import CourseSchedules from '../components/students/course-options/CourseSchedules'
 
 export default {
@@ -455,14 +461,37 @@ export default {
       time: {
         frequency: 1,
       },
-      formData: {
-        learning_schedule: null,
-      },
+      selected_schedule: '',
     }
   },
   mounted() {
     // from mixins@Session
     this.setupCurrentSession()
+  },
+  methods: {
+    async candidateRegister() {
+      this.$nuxt.$loading.start()
+
+      const session = this.getSession()
+      const formData = {
+        candidate_id: session.c,
+        schedule_id: this.selected_schedule,
+      }
+
+      try {
+        const response = await this.$axios.post(
+          ENV.participant.joinUrl,
+          formData
+        )
+
+        if (response.status === 201) {
+          this.commitSession({ rg: false, c: null })
+
+          this.$nuxt.$loading.finish()
+          this.$nuxt.$router.push('/selesai')
+        }
+      } catch (e) {}
+    },
   },
 }
 </script>

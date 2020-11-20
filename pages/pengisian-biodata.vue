@@ -129,7 +129,7 @@ export default {
         )
         if (response.status === 201) {
           // from mixins@Session
-          this.commitSession({ rg: true })
+          this.commitSession({ rg: true, c: response.data.candidate_id })
 
           this.$nuxt.$loading.finish()
           this.$nuxt.$router.push('/pemilihan-waktu-belajar')

@@ -4,6 +4,7 @@ const AREA_ADMINISTRATION = process.env.ADMINISTRATION_AREA_API
 export default {
   participant: {
     registrationUrl: BASE_URL + process.env.PARTICIPANT_REGISTRATION_URL,
+    joinUrl: BASE_URL + process.env.JOIN_URL,
   },
   area: {
     provinces: AREA_ADMINISTRATION + process.env.PROVINCE_URL,
