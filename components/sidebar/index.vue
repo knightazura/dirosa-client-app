@@ -84,7 +84,7 @@
         <phone-icon size="21" class="stroke-2 mr-3"></phone-icon> Hubungi Kami
       </div>
       <div class="button-faq">
-        <button class="py-2 px-6 bg-yellow-300 text-white focus:outline-none">
+        <button class="main-button py-2 px-6 focus:outline-none">
           FAQ
         </button>
       </div>
