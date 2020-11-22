@@ -19,6 +19,9 @@
     }
 
   @screen xl { max-width: 900px }
+
+
+    .landing-page-container { @apply flex flex-col w-full justify-center items-center }
 }
 
 .main-button { @include main-button-style }

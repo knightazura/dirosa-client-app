@@ -1,13 +1,20 @@
 <template>
   <div id="right-side">
-    <NuxtLink to="/pengisian-biodata">Pengisian Biodata</NuxtLink>
+    <div class="landing-page-container">
+      <welcome-illustration :customClass="'w-3/4 md:w-1/2'"></welcome-illustration>
+      <NuxtLink to="/pengisian-biodata">Pengisian Biodata</NuxtLink>
+    </div>
   </div>
 </template>
 
 <script>
 import Session from '@/mixins/session'
+import WelcomeIllustration from '@/components/landing-page/welcome-illustration'
 
 export default {
+  components: {
+    WelcomeIllustration,
+  },
   async asyncData({ $axios }) {
     const options = {
       headers: {
