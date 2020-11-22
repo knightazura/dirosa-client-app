@@ -64,7 +64,7 @@
               :class="
                 [
                   'class-option',
-                  type.activeClass === 2 ? 'class-option__active' : '',
+                  type.activeClass > 1 ? 'class-option__active' : '',
                 ].join(' ')
               "
               @click="type.activeClass = 2"
@@ -73,7 +73,7 @@
                 :class="
                   [
                     'option__check-icon-wrapper',
-                    type.activeClass === 2 ? 'option__active' : '',
+                    type.activeClass > 1 ? 'option__active' : '',
                   ].join(' ')
                 "
               >
@@ -85,7 +85,7 @@
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    :stroke="type.activeClass === 2 ? '#FFFFFF' : '#1A5543'"
+                    :stroke="type.activeClass > 1 ? '#FFFFFF' : '#1A5543'"
                     d="M13 3.37495L6.125 9.56245L3 6.74995"
                     stroke-width="3"
                     stroke-linecap="round"
@@ -112,17 +112,17 @@
 
           <!-- Private group options -->
           <div
-            v-if="type.activeClass === 2"
+            v-if="type.activeClass > 1"
             class="type-section__private-option-wrapper"
           >
             <!-- Individu option -->
-            <div class="private-class-option" @click="type.privateType = 1">
+            <div class="private-class-option" @click="type.activeClass = 2">
               <div class="private-class-option__icon-wrapper">
                 <div
                   :class="
                     [
                       'option__check-icon-wrapper',
-                      type.privateType === 1 ? 'option__active' : '',
+                      type.activeClass === 2 ? 'option__active' : '',
                     ].join(' ')
                   "
                 >
@@ -134,7 +134,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      :stroke="type.privateType === 1 ? '#FFFFFF' : '#1A5543'"
+                      :stroke="type.activeClass === 2 ? '#FFFFFF' : '#1A5543'"
                       d="M13 3.37495L6.125 9.56245L3 6.74995"
                       stroke-width="3"
                       stroke-linecap="round"
@@ -153,13 +153,13 @@
             </div>
 
             <!-- Family option -->
-            <div class="private-class-option" @click="type.privateType = 2">
+            <div class="private-class-option" @click="type.activeClass = 3">
               <div class="private-class-option__icon-wrapper">
                 <div
                   :class="
                     [
                       'option__check-icon-wrapper',
-                      type.privateType === 2 ? 'option__active' : '',
+                      type.activeClass === 3 ? 'option__active' : '',
                     ].join(' ')
                   "
                 >
@@ -171,7 +171,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      :stroke="type.privateType === 2 ? '#FFFFFF' : '#1A5543'"
+                      :stroke="type.activeClass === 3 ? '#FFFFFF' : '#1A5543'"
                       d="M13 3.37495L6.125 9.56245L3 6.74995"
                       stroke-width="3"
                       stroke-linecap="round"
@@ -190,13 +190,13 @@
             </div>
 
             <!-- Individu option -->
-            <div class="private-class-option" @click="type.privateType = 3">
+            <div class="private-class-option" @click="type.activeClass = 4">
               <div class="private-class-option__icon-wrapper">
                 <div
                   :class="
                     [
                       'option__check-icon-wrapper',
-                      type.privateType === 3 ? 'option__active' : '',
+                      type.activeClass === 4 ? 'option__active' : '',
                     ].join(' ')
                   "
                 >
@@ -208,7 +208,7 @@
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      :stroke="type.privateType === 3 ? '#FFFFFF' : '#1A5543'"
+                      :stroke="type.activeClass === 4 ? '#FFFFFF' : '#1A5543'"
                       d="M13 3.37495L6.125 9.56245L3 6.74995"
                       stroke-width="3"
                       stroke-linecap="round"
@@ -316,7 +316,7 @@
           <div class="type-section__program-types-confirmation">
             <button
               class="program-types-confirmation__button"
-              @click="type.fillStatus = true"
+              @click="getAvailableTime"
             >
               Lanjut
             </button>
@@ -326,9 +326,6 @@
         <!-- Summary -->
         <div v-if="type.fillStatus" class="type-section__summary">
           {{ constants.className[type.activeClass] }}
-          <span v-if="type.activeClass === 2">
-            ({{ constants.privateTypeName[type.privateType] }})
-          </span>
           -
           {{ constants.implementationName[type.implementation] }}
         </div>
@@ -402,6 +399,7 @@
           <!-- Schedule selector -->
           <CourseSchedules
             v-model="selected_schedule"
+            :availableTimes="availableTimes"
             :frequency="time.frequency"
             :implementation="type.implementation"
           />
@@ -439,12 +437,9 @@ export default {
       constants: {
         className: {
           1: 'Klasikal',
-          2: 'Private',
-        },
-        privateTypeName: {
-          1: 'Individu',
-          2: 'Keluarga',
-          3: 'Anak - anak',
+          2: 'Individu (private)',
+          3: 'Keluarga (private)',
+          4: 'Anak - anak (private)'
         },
         implementationName: {
           1: 'Offline',
@@ -453,8 +448,7 @@ export default {
         frequencies: [1, 2, 3],
       },
       type: {
-        activeClass: 1, // 1: Klasikal, 2: Private,
-        privateType: 1, // 1: Individu, 2: Family, 3. Children
+        activeClass: 1, // 1: Klasikal, 2: Individu (Private), 3: Family (Private), 4. Children (Private)
         implementation: 1, // 1: Offline, 2: Online
         fillStatus: false,
       },
@@ -462,6 +456,7 @@ export default {
         frequency: 1,
       },
       selected_schedule: '',
+      availableTimes: null,
     }
   },
   mounted() {
@@ -491,6 +486,32 @@ export default {
           this.$nuxt.$router.push('/selesai')
         }
       } catch (e) {}
+    },
+    async getAvailableTime() {
+      this.type.fillStatus = true
+      const options = {
+        dpdArea: 3175,
+        classType: this.type.activeClass,
+        implementation: this.type.implementation,
+      }
+      const url = (!Object.is(this.type.implementation, 2))
+        ? `/waktu-tersedia?dpd_area=${options.dpdArea}&ct=${options.classType}&imp=${options.implementation}&fq=${this.time.frequency}`
+        : `/waktu-tersedia?ct=${options.classType}&imp=${options.implementation}&fq=${this.time.frequency}`
+
+      try {
+        const availableTimes = await this.$axios.get(ENV.base_url + url)
+        this.availableTimes = availableTimes.data
+      } catch (error) {
+        
+      }
+    },
+    setClassType(type) {
+      this.type.activeClass = type
+    },
+  },
+  watch: {
+    'time.frequency': function (selectedFrequency) {
+      this.getAvailableTime()
     },
   },
 }
