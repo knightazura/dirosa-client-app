@@ -1,1 +1,12 @@
 $primaryGreen: #2D7C66;
+$primaryGreenBorderColor: 
+    rgba(17, 57, 45, 0.35)
+    rgba(17, 57, 45, 0.35)
+    rgba(17, 57, 45, 0.66);
+$primaryGreenGradientBackground: radial-gradient(
+    114.95% 100% at 50.49% 0%,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0) 100%), #1A5543;
+$mainButtonShadow: 0px 2px 4px rgba(0, 0, 0, 0.25),
+inset 0px -1px 2px rgba(0, 0, 0, 0.15),
+inset 0px 2px 5px rgba(255, 255, 255, 0.07);

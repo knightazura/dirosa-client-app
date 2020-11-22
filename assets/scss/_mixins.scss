@@ -1,0 +1,11 @@
+@mixin main-button-style {
+    transition: all .35s ease-in-out;
+    border-width: 1px;
+    border-color: $primaryGreenBorderColor;
+    background: $primaryGreenGradientBackground;
+    box-shadow: $mainButtonShadow;
+    border-radius: 7px;
+    color: white;
+    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+    font-weight: 700;
+}

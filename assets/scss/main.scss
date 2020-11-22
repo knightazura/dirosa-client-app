@@ -1,4 +1,5 @@
 @import "colors";
+@import "mixins";
 
 #container {
     @apply flex flex-col;
@@ -19,3 +20,5 @@
 
   @screen xl { max-width: 900px }
 }
+
+.main-button { @include main-button-style }

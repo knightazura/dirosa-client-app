@@ -64,12 +64,14 @@
         <Phonenumber v-model="formData.phone_number" />
       </div>
 
-      <div class="flex flex-row justify-between mt-4">
-        <div class="flex-shrink py-2">
-          <NuxtLink to="/">Selamat Datang</NuxtLink>
+      <div class="flex flex-row justify-between md:mt-4">
+        <div class="hidden flex-shrink py-2 md:block">
+          <NuxtLink to="/">
+            <arrow-left-icon></arrow-left-icon>
+          </NuxtLink>
         </div>
         <div
-          class="flex flex-shrink bg-red-600 text-white justify-end p-2 cursor-pointer"
+          class="form-pendaftaran__join-button main-button"
           @click="register"
         >
           Pemilihan Waktu Belajar
@@ -82,12 +84,16 @@
 </template>
 
 <script>
+import { ArrowLeftIcon } from 'vue-feather-icons'
 import Session from '@/mixins/session'
 import ENV from '@/services/env'
 import FormComponents from '~/components/students/registration-form'
 
 export default {
-  components: FormComponents,
+  components: {
+    ...FormComponents,
+    ArrowLeftIcon,
+  },
   mixins: [Session],
   data() {
     return {
