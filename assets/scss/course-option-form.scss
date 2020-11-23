@@ -176,3 +176,12 @@
     transform: translateX(10px);
     opacity: 0;
 }
+
+
+// Variants
+@variants hover {
+  .class-option,
+  .private-class-option {
+    cursor: pointer;
+  }
+}
