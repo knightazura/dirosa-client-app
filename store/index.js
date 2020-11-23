@@ -5,7 +5,7 @@ export const state = () => ({
     rg: false,
     // last page
     lp: 'index',
-    // candidate_id
+    // candidate data
     c: null,
   },
 })

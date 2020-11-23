@@ -469,7 +469,7 @@ export default {
 
       const session = this.getSession()
       const formData = {
-        candidate_id: session.c,
+        candidate_id: session.c.id,
         schedule_id: this.selected_schedule,
       }
 
@@ -489,8 +489,12 @@ export default {
     },
     async getAvailableTime() {
       this.type.fillStatus = true
+
+      // get session data
+      const session = this.getSession()
+
       const options = {
-        dpdArea: 3175,
+        dpdArea: session.c.d_a,
         classType: this.type.activeClass,
         implementation: this.type.implementation,
       }
@@ -502,7 +506,21 @@ export default {
         const availableTimes = await this.$axios.get(ENV.base_url + url)
         this.availableTimes = availableTimes.data
       } catch (error) {
-        
+        console.log({ error })
+        this.$toast.error(
+          'Oops.. Maaf ada kesalahan ketika mengambil data jadwal belajar',
+          {
+            duration: 4500,
+            theme: 'bubble',
+            closeOnSwipe: true,
+            containerClass: 'mt-2',
+            className: 'mx-3 py-2',
+            action: {
+              text: 'Tutup',
+              onClick: (e, toastObject) => toastObject.goAway(0),
+            },
+          }
+        )
       }
     },
     setClassType(type) {
