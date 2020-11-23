@@ -84,9 +84,7 @@
         <phone-icon size="21" class="stroke-2 mr-3"></phone-icon> Hubungi Kami
       </div>
       <div class="button-faq">
-        <button class="main-button py-2 px-6 focus:outline-none">
-          FAQ
-        </button>
+        <button class="main-button py-2 px-6 focus:outline-none">FAQ</button>
       </div>
     </div>
   </aside>
@@ -137,6 +135,9 @@ export default {
         for (let i = 1; i < STEP_STATE.length; i++) {
           if (ROUTE_NAMES[i] !== routeName && !active) {
             state.push(FINISH_STATE)
+          } else if (ROUTE_NAMES[i] === 'selesai' && routeName === 'selesai') {
+            state.push(FINISH_STATE)
+            active = false
           } else if (ROUTE_NAMES[i] === routeName) {
             state.push(ACTIVE_STATE)
             active = true

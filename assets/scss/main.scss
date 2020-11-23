@@ -11,7 +11,7 @@
 }
 
 #right-side {
-    @apply px-3 pt-16;
+    @apply px-3;
     @screen md {
         @apply flex flex-grow justify-center items-center p-0;
         max-height: 100vh;
@@ -24,4 +24,8 @@
     .landing-page-container { @apply flex flex-col w-full justify-center items-center }
 }
 
+.right-side__with-headerbar { padding-top: 56px; }
+.right-side__no-headerbar { @apply pt-0 }
+
 .main-button { @include main-button-style }
+.secondary-button { @include secondary-button-style }

@@ -1,5 +1,5 @@
 <template>
-  <div id="right-side">
+  <div id="right-side" class="right-side__with-headerbar">
     <div class="form-course-option">
       <!-- Program types -->
       <div class="form-course-option__type-section">
@@ -400,7 +400,7 @@
           <template v-if="availableTimes">
             <CourseSchedules
               v-model="selected_schedule"
-              :availableTimes="availableTimes"
+              :available-times="availableTimes"
               :frequency="time.frequency"
               :implementation="type.implementation"
             />
@@ -441,7 +441,7 @@ export default {
           1: 'Klasikal',
           2: 'Individu (private)',
           3: 'Keluarga (private)',
-          4: 'Anak - anak (private)'
+          4: 'Anak - anak (private)',
         },
         implementationName: {
           1: 'Offline',
@@ -461,14 +461,19 @@ export default {
       availableTimes: null,
     }
   },
-  mounted() {
-    // from mixins@Session
-    this.setupCurrentSession()
-  },
   computed: {
     session() {
       return this.getSession()
-    }
+    },
+  },
+  watch: {
+    'time.frequency'(selectedFrequency) {
+      this.getAvailableTime()
+    },
+  },
+  mounted() {
+    // from mixins@Session
+    this.setupCurrentSession()
   },
   methods: {
     async candidateRegister() {
@@ -502,7 +507,7 @@ export default {
         classType: this.type.activeClass,
         implementation: this.type.implementation,
       }
-      const url = (!Object.is(this.type.implementation, 2))
+      const url = !Object.is(this.type.implementation, 2)
         ? `/waktu-tersedia?dpd_area=${options.dpdArea}&ct=${options.classType}&imp=${options.implementation}&fq=${this.time.frequency}`
         : `/waktu-tersedia?ct=${options.classType}&imp=${options.implementation}&fq=${this.time.frequency}`
 
@@ -536,12 +541,12 @@ export default {
       try {
         const response = await this.$axios.post(ENV.participant.joinUrl, {
           candidate_id: this.session.c.id,
-          schedule_id: this.selected_schedule
-        });
-  
+          schedule_id: this.selected_schedule,
+        })
+
         // from mixins@Session
         this.commitSession({ j: true })
-        
+
         this.$nuxt.$loading.finish()
         this.$nuxt.$router.push('/selesai')
       } catch (error) {
@@ -561,11 +566,6 @@ export default {
           }
         )
       }
-    },
-  },
-  watch: {
-    'time.frequency': function (selectedFrequency) {
-      this.getAvailableTime()
     },
   },
 }

@@ -1,9 +1,14 @@
 <template>
   <div id="mobile-header">
-    <NuxtLink v-if="$route.name !== 'index'" :to="headerProps.backRoute">
-      <arrow-left-icon></arrow-left-icon>
-    </NuxtLink>
-    <h1>{{ headerProps.title }}</h1>
+    <template v-if="$route.name !== 'index'">
+      <NuxtLink :to="headerProps.backRoute">
+        <arrow-left-icon></arrow-left-icon>
+      </NuxtLink>
+      <h1 class="pl-3 flex-grow">{{ headerProps.title }}</h1>
+    </template>
+    <template v-else>
+      <h1 class="mx-auto">{{ headerProps.title }}</h1>
+    </template>
   </div>
 </template>
 

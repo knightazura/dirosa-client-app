@@ -1,5 +1,5 @@
 <template>
-  <div id="right-side">
+  <div id="right-side" class="right-side__with-headerbar">
     <div class="form-pendaftaran md:w-2/3">
       <FullName v-model="formData.full_name" class="mb-8" />
 
