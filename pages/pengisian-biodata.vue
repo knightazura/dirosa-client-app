@@ -74,7 +74,7 @@
           class="form-pendaftaran__join-button main-button"
           @click="register"
         >
-          Pemilihan Waktu Belajar
+          Selanjutnya
         </div>
         <!--        <NuxtLink to="/pemilihan-waktu-belajar">-->
         <!--        </NuxtLink>-->
