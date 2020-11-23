@@ -17,6 +17,7 @@ const session = {
         this.checkSession(session) ? {} : session,
         {
           rg: this.checkSession(session) ? false : session.rg,
+          j: this.checkSession(session) ? false : session.j,
           lp: this.$route.name,
         }
       )

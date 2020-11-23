@@ -1,7 +1,7 @@
 <template>
   <main id="container">
     <sidebar v-if="$device.isDesktop || $device.isTablet"></sidebar>
-    <mobile-header v-else></mobile-header>
+    <mobile-header v-else-if="!finishJoinedPage"></mobile-header>
     <Nuxt />
   </main>
 </template>
@@ -17,6 +17,11 @@ export default {
     MobileHeader,
   },
   mixins: [Session],
+  computed: {
+    finishJoinedPage() {
+      return this.$route.name === 'selesai'
+    }
+  },
   mounted() {
     // from mixins@Session
     const session = this.getSession()

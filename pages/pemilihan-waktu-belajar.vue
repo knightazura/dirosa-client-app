@@ -543,7 +543,7 @@ export default {
         this.commitSession({ j: true })
         
         this.$nuxt.$loading.finish()
-        this.$nuxt.$router.push('/pemilihan-waktu-belajar')
+        this.$nuxt.$router.push('/selesai')
       } catch (error) {
         console.log({ error })
         this.$toast.error(
