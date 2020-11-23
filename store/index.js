@@ -1,12 +1,14 @@
 export const state = () => ({
   // session
   s: {
-    // registered
+    // registered status
     rg: false,
     // last page
     lp: 'index',
-    // candidate data
+    // candidate data { id: candidate ID, d_a: DPD area related to their address }
     c: null,
+    // joined status
+    j: false
   },
 })
 

@@ -397,17 +397,19 @@
           </div>
 
           <!-- Schedule selector -->
-          <CourseSchedules
-            v-model="selected_schedule"
-            :availableTimes="availableTimes"
-            :frequency="time.frequency"
-            :implementation="type.implementation"
-          />
+          <template v-if="availableTimes">
+            <CourseSchedules
+              v-model="selected_schedule"
+              :availableTimes="availableTimes"
+              :frequency="time.frequency"
+              :implementation="type.implementation"
+            />
+          </template>
 
           <!-- Register!! -->
           <button
-            class="time-section__register-button"
-            @click="candidateRegister"
+            class="time-section__register-button main-button"
+            @click="join"
           >
             Daftar
           </button>
@@ -463,6 +465,11 @@ export default {
     // from mixins@Session
     this.setupCurrentSession()
   },
+  computed: {
+    session() {
+      return this.getSession()
+    }
+  },
   methods: {
     async candidateRegister() {
       this.$nuxt.$loading.start()
@@ -490,11 +497,8 @@ export default {
     async getAvailableTime() {
       this.type.fillStatus = true
 
-      // get session data
-      const session = this.getSession()
-
       const options = {
-        dpdArea: session.c.d_a,
+        dpdArea: this.session.c.d_a,
         classType: this.type.activeClass,
         implementation: this.type.implementation,
       }
@@ -525,6 +529,38 @@ export default {
     },
     setClassType(type) {
       this.type.activeClass = type
+    },
+    async join() {
+      this.$nuxt.$loading.start()
+
+      try {
+        const response = await this.$axios.post(ENV.participant.joinUrl, {
+          candidate_id: this.session.c.id,
+          schedule_id: this.selected_schedule
+        });
+  
+        // from mixins@Session
+        this.commitSession({ j: true })
+        
+        this.$nuxt.$loading.finish()
+        this.$nuxt.$router.push('/pemilihan-waktu-belajar')
+      } catch (error) {
+        console.log({ error })
+        this.$toast.error(
+          'Oops.. Maaf ada kesalahan ketika anda ingin mendaftar',
+          {
+            duration: 4500,
+            theme: 'bubble',
+            closeOnSwipe: true,
+            containerClass: 'mt-2',
+            className: 'mx-3 py-2',
+            action: {
+              text: 'Tutup',
+              onClick: (e, toastObject) => toastObject.goAway(0),
+            },
+          }
+        )
+      }
     },
   },
   watch: {
