@@ -59,5 +59,16 @@ export default {
 
   server: {
     port: 6700
+  },
+
+  env: {
+    BACKEND_BASE_URL: process.env.BACKEND_BASE_URL,
+    ADMINISTRATION_AREA_API: process.env.ADMINISTRATION_AREA_API,
+    PARTICIPANT_REGISTRATION_URL: process.env.PARTICIPANT_REGISTRATION_URL,
+    JOIN_URL: process.env.JOIN_URL,
+    PROVINCE_URL: process.env.PROVINCE_URL,
+    CITY_URL: process.env.CITY_URL,
+    DISTRICT_URL: process.env.DISTRICT_URL,
+    SUBDISTRICT_URL: process.env.SUBDISTRICT_URL,
   }
 }
