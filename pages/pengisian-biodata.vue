@@ -60,7 +60,7 @@
       </div>
 
       <div class="flex flex-col md:flex-row">
-        <EmailAddress v-model="formData.account.email" />
+        <EmailAddress v-model="formData.email" />
         <Phonenumber v-model="formData.phone_number" />
       </div>
 
@@ -125,8 +125,9 @@ export default {
   },
   methods: {
     async register() {
-      this.formData.account.password = 'dirosa_' + this.formData.phone_number
       this.$nuxt.$loading.start()
+      let age = parseInt(this.formData.age)
+      this.formData.age = age;
 
       try {
         const response = await this.$axios.post(
