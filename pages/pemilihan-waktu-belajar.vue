@@ -508,11 +508,11 @@ export default {
         implementation: this.type.implementation,
       }
       const url = !Object.is(this.type.implementation, 2)
-        ? `/waktu-tersedia?dpd_area=${options.dpdArea}&ct=${options.classType}&imp=${options.implementation}&fq=${this.time.frequency}`
-        : `/waktu-tersedia?ct=${options.classType}&imp=${options.implementation}&fq=${this.time.frequency}`
+        ? `${ENV.participant.courseAvailableTime}?dpd_area=${options.dpdArea}&ct=${options.classType}&imp=${options.implementation}&fq=${this.time.frequency}`
+        : `${ENV.participant.courseAvailableTime}?ct=${options.classType}&imp=${options.implementation}&fq=${this.time.frequency}`
 
       try {
-        const availableTimes = await this.$axios.get(ENV.base_url + url)
+        const availableTimes = await this.$axios.get(url)
         this.availableTimes = availableTimes.data
       } catch (error) {
         console.log({ error })
