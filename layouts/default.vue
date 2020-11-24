@@ -1,7 +1,7 @@
 <template>
   <main id="container">
     <sidebar></sidebar>
-    <mobile-header if="!finishJoinedPage"></mobile-header>
+    <mobile-header v-if="!finishJoinedPage"></mobile-header>
     <Nuxt />
   </main>
 </template>

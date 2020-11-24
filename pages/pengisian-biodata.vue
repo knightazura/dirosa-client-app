@@ -116,12 +116,11 @@ export default {
       this.loadArea('districts', newCity)
     },
   },
-  created() {
-    this.loadArea()
-  },
   mounted() {
     // from mixins@Session
     this.setupCurrentSession()
+
+    this.loadArea()
   },
   methods: {
     async register() {
