@@ -20,91 +20,254 @@
             ['type-section__form', type.fillStatus ? 'hidden' : ''].join(' ')
           "
         >
-          <!-- Class type -->
-          <div class="type-section__type-class">
-            <!-- Klasikal option -->
-            <div
-              :class="
-                [
-                  'class-option',
-                  type.activeClass === 1 ? 'class-option__active' : '',
-                ].join(' ')
-              "
-              @click="type.activeClass = 1"
-            >
-              <div
-                :class="
-                  [
-                    'option__check-icon-wrapper',
-                    type.activeClass === 1 ? 'option__active' : '',
-                  ].join(' ')
-                "
-              >
-                <svg
-                  width="16"
-                  height="14"
-                  viewBox="0 0 16 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+          <ContentLoader v-if="candidateJobType === 99">
+            <rect x="0" y="0" rx="3" ry="3" width="300" height="40" />
+            <rect x="0" y="320" rx="3" ry="3" width="280" height="30" />
+          </ContentLoader>
+          <template v-else>
+            <!-- For jobType = 1 -->
+            <template v-if="candidateJobType === 1">
+              <!-- Class type -->
+              <div class="type-section__type-class">
+                <!-- Klasikal option -->
+                <div
+                  :class="
+                    [
+                      'class-option',
+                      type.activeClass === 1 ? 'class-option__active' : '',
+                    ].join(' ')
+                  "
+                  @click="type.activeClass = 1"
                 >
-                  <path
-                    :stroke="type.activeClass === 1 ? '#FFFFFF' : '#1A5543'"
-                    d="M13 3.37495L6.125 9.56245L3 6.74995"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-              <p>Klasikal</p>
-            </div>
+                  <div
+                    :class="
+                      [
+                        'option__check-icon-wrapper',
+                        type.activeClass === 1 ? 'option__active' : '',
+                      ].join(' ')
+                    "
+                  >
+                    <svg
+                      width="16"
+                      height="14"
+                      viewBox="0 0 16 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        :stroke="type.activeClass === 1 ? '#FFFFFF' : '#1A5543'"
+                        d="M13 3.37495L6.125 9.56245L3 6.74995"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <p>Klasikal</p>
+                </div>
 
-            <!-- Private option -->
-            <div
-              :class="
-                [
-                  'class-option',
-                  type.activeClass > 1 ? 'class-option__active' : '',
-                ].join(' ')
-              "
-              @click="type.activeClass = 2"
-            >
-              <div
-                :class="
-                  [
-                    'option__check-icon-wrapper',
-                    type.activeClass > 1 ? 'option__active' : '',
-                  ].join(' ')
-                "
-              >
-                <svg
-                  width="16"
-                  height="14"
-                  viewBox="0 0 16 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                <!-- Private option -->
+                <div
+                  :class="
+                    [
+                      'class-option',
+                      type.activeClass > 1 ? 'class-option__active' : '',
+                    ].join(' ')
+                  "
+                  @click="type.activeClass = 2"
                 >
-                  <path
-                    :stroke="type.activeClass > 1 ? '#FFFFFF' : '#1A5543'"
-                    d="M13 3.37495L6.125 9.56245L3 6.74995"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+                  <div
+                    :class="
+                      [
+                        'option__check-icon-wrapper',
+                        type.activeClass > 1 ? 'option__active' : '',
+                      ].join(' ')
+                    "
+                  >
+                    <svg
+                      width="16"
+                      height="14"
+                      viewBox="0 0 16 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        :stroke="type.activeClass > 1 ? '#FFFFFF' : '#1A5543'"
+                        d="M13 3.37495L6.125 9.56245L3 6.74995"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <p>Private</p>
+                </div>
               </div>
-              <p>Private</p>
-            </div>
-          </div>
 
-          <!-- Classical class information -->
-          <transition name="slide-fade">
-            <div
-              v-if="type.activeClass === 1"
-              class="type-section__classical-info"
-            >
-              <div class="classical-info__price">
-                Rp 150,000/bulan
+              <!-- Classical class information -->
+              <transition name="slide-fade">
+                <div
+                  v-if="type.activeClass === 1"
+                  class="type-section__classical-info"
+                >
+                  <div class="classical-info__price">
+                    Rp 150,000/bulan
+                  </div>
+                  <div class="classical-info__class-requirement">
+                    <alert-circle-icon
+                      size="1.5x"
+                      class="mr-2 text-orange-500"
+                    ></alert-circle-icon>
+                    <span>Minimal 5 orang/kelas.</span>
+                  </div>
+                </div>
+              </transition>
+
+              <!-- Private group options -->
+              <div
+                v-if="type.activeClass > 1"
+                class="type-section__private-option-wrapper"
+              >
+                <!-- Individu option -->
+                <div
+                  @click="type.activeClass = 2"
+                  :class="
+                    [
+                      'private-class-option',
+                      type.activeClass === 2 ? 'private-class-option__selected' : ''
+                    ].join(' ')
+                    "
+                  >
+                  <div class="private-class-option__icon-wrapper">
+                    <div
+                      :class="
+                        [
+                          'option__check-icon-wrapper',
+                          type.activeClass === 2 ? 'option__active' : '',
+                        ].join(' ')
+                      "
+                    >
+                      <svg
+                        width="16"
+                        height="14"
+                        viewBox="0 0 16 14"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          :stroke="type.activeClass === 2 ? '#FFFFFF' : '#1A5543'"
+                          d="M13 3.37495L6.125 9.56245L3 6.74995"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div class="private-class-option__content">
+                    <p class="private-class-option__text">Individu</p>
+                    <p class="private-class-option__description">
+                      Biaya Rp 1,750,000
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Family option -->
+                <div
+                  @click="type.activeClass = 3"
+                  :class="
+                    [
+                      'private-class-option',
+                      type.activeClass === 3 ? 'private-class-option__selected' : ''
+                    ].join(' ')
+                    "
+                  >
+                  <div class="private-class-option__icon-wrapper">
+                    <div
+                      :class="
+                        [
+                          'option__check-icon-wrapper',
+                          type.activeClass === 3 ? 'option__active' : '',
+                        ].join(' ')
+                      "
+                    >
+                      <svg
+                        width="16"
+                        height="14"
+                        viewBox="0 0 16 14"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          :stroke="type.activeClass === 3 ? '#FFFFFF' : '#1A5543'"
+                          d="M13 3.37495L6.125 9.56245L3 6.74995"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div class="private-class-option__content">
+                    <p class="private-class-option__text">Keluarga</p>
+                    <p class="private-class-option__description">
+                      Biaya Rp 4,500,000 (maksimal 9 orang)
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Individu option -->
+                <div
+                  @click="type.activeClass = 4"
+                  :class="
+                    [
+                      'private-class-option',
+                      type.activeClass === 4 ? 'private-class-option__selected' : ''
+                    ].join(' ')
+                    "
+                  >
+                  <div class="private-class-option__icon-wrapper">
+                    <div
+                      :class="
+                        [
+                          'option__check-icon-wrapper',
+                          type.activeClass === 4 ? 'option__active' : '',
+                        ].join(' ')
+                      "
+                    >
+                      <svg
+                        width="16"
+                        height="14"
+                        viewBox="0 0 16 14"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          :stroke="type.activeClass === 4 ? '#FFFFFF' : '#1A5543'"
+                          d="M13 3.37495L6.125 9.56245L3 6.74995"
+                          stroke-width="3"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div class="private-class-option__content">
+                    <p class="private-class-option__text">Anak - anak</p>
+                    <p class="private-class-option__description">
+                      Biaya Rp 100,000/bulan
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <!-- For jobType = 0 -->
+            <div v-else class="type-section__classical-info">
+              <div class="p-2 bg-green-100 border border-green-600 rounded shadow mb-2">
+                <p>Klasikal</p>
               </div>
               <div class="classical-info__class-requirement">
                 <alert-circle-icon
@@ -114,243 +277,102 @@
                 <span>Minimal 5 orang/kelas.</span>
               </div>
             </div>
-          </transition>
 
-          <!-- Private group options -->
-          <div
-            v-if="type.activeClass > 1"
-            class="type-section__private-option-wrapper"
-          >
-            <!-- Individu option -->
-            <div
-              @click="type.activeClass = 2"
-              :class="
-                [
-                  'private-class-option',
-                  type.activeClass === 2 ? 'private-class-option__selected' : ''
-                ].join(' ')
-                "
-              >
-              <div class="private-class-option__icon-wrapper">
+            <!-- Class implementation -->
+            <div class="type-section__implementation-option-wrapper">
+              <h3 class="implementation-option__title">Pelaksanaan</h3>
+
+              <div class="implementation-options">
+                <!-- Offline -->
                 <div
                   :class="
                     [
-                      'option__check-icon-wrapper',
-                      type.activeClass === 2 ? 'option__active' : '',
+                      'class-option',
+                      type.implementation === 1 ? 'class-option__active' : '',
                     ].join(' ')
                   "
+                  @click="type.implementation = 1"
                 >
-                  <svg
-                    width="16"
-                    height="14"
-                    viewBox="0 0 16 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
+                  <div
+                    :class="
+                      [
+                        'option__check-icon-wrapper',
+                        type.implementation === 1 ? 'option__active' : '',
+                      ].join(' ')
+                    "
                   >
-                    <path
-                      :stroke="type.activeClass === 2 ? '#FFFFFF' : '#1A5543'"
-                      d="M13 3.37495L6.125 9.56245L3 6.74995"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
+                    <svg
+                      width="16"
+                      height="14"
+                      viewBox="0 0 16 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        :stroke="
+                          type.implementation === 1 ? '#FFFFFF' : '#1A5543'
+                        "
+                        d="M13 3.37495L6.125 9.56245L3 6.74995"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <p>Offline</p>
                 </div>
-              </div>
 
-              <div class="private-class-option__content">
-                <p class="private-class-option__text">Individu</p>
-                <p class="private-class-option__description">
-                  Biaya Rp 1,750,000
-                </p>
+                <!-- Online -->
+                <div
+                  :class="
+                    [
+                      'class-option',
+                      type.implementation === 2 ? 'class-option__active' : '',
+                    ].join(' ')
+                  "
+                  @click="type.implementation = 2"
+                >
+                  <div
+                    :class="
+                      [
+                        'option__check-icon-wrapper',
+                        type.implementation === 2 ? 'option__active' : '',
+                      ].join(' ')
+                    "
+                  >
+                    <svg
+                      width="16"
+                      height="14"
+                      viewBox="0 0 16 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        :stroke="
+                          type.implementation === 2 ? '#FFFFFF' : '#1A5543'
+                        "
+                        d="M13 3.37495L6.125 9.56245L3 6.74995"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <p>Online</p>
+                </div>
               </div>
             </div>
 
-            <!-- Family option -->
-            <div
-              @click="type.activeClass = 3"
-              :class="
-                [
-                  'private-class-option',
-                  type.activeClass === 3 ? 'private-class-option__selected' : ''
-                ].join(' ')
-                "
+            <!-- Class type confirmation -->
+            <div class="type-section__program-types-confirmation">
+              <button
+                class="program-types-confirmation__button"
+                @click="getAvailableTime"
               >
-              <div class="private-class-option__icon-wrapper">
-                <div
-                  :class="
-                    [
-                      'option__check-icon-wrapper',
-                      type.activeClass === 3 ? 'option__active' : '',
-                    ].join(' ')
-                  "
-                >
-                  <svg
-                    width="16"
-                    height="14"
-                    viewBox="0 0 16 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      :stroke="type.activeClass === 3 ? '#FFFFFF' : '#1A5543'"
-                      d="M13 3.37495L6.125 9.56245L3 6.74995"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              <div class="private-class-option__content">
-                <p class="private-class-option__text">Keluarga</p>
-                <p class="private-class-option__description">
-                  Biaya Rp 4,500,000 (maksimal 9 orang)
-                </p>
-              </div>
+                Lanjut
+              </button>
             </div>
-
-            <!-- Individu option -->
-            <div
-              @click="type.activeClass = 4"
-              :class="
-                [
-                  'private-class-option',
-                  type.activeClass === 4 ? 'private-class-option__selected' : ''
-                ].join(' ')
-                "
-              >
-              <div class="private-class-option__icon-wrapper">
-                <div
-                  :class="
-                    [
-                      'option__check-icon-wrapper',
-                      type.activeClass === 4 ? 'option__active' : '',
-                    ].join(' ')
-                  "
-                >
-                  <svg
-                    width="16"
-                    height="14"
-                    viewBox="0 0 16 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      :stroke="type.activeClass === 4 ? '#FFFFFF' : '#1A5543'"
-                      d="M13 3.37495L6.125 9.56245L3 6.74995"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-
-              <div class="private-class-option__content">
-                <p class="private-class-option__text">Anak - anak</p>
-                <p class="private-class-option__description">
-                  Biaya Rp 100,000/bulan
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Class implementation -->
-          <div class="type-section__implementation-option-wrapper">
-            <h3 class="implementation-option__title">Pelaksanaan</h3>
-
-            <div class="implementation-options">
-              <!-- Offline -->
-              <div
-                :class="
-                  [
-                    'class-option',
-                    type.implementation === 1 ? 'class-option__active' : '',
-                  ].join(' ')
-                "
-                @click="type.implementation = 1"
-              >
-                <div
-                  :class="
-                    [
-                      'option__check-icon-wrapper',
-                      type.implementation === 1 ? 'option__active' : '',
-                    ].join(' ')
-                  "
-                >
-                  <svg
-                    width="16"
-                    height="14"
-                    viewBox="0 0 16 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      :stroke="
-                        type.implementation === 1 ? '#FFFFFF' : '#1A5543'
-                      "
-                      d="M13 3.37495L6.125 9.56245L3 6.74995"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                <p>Offline</p>
-              </div>
-
-              <!-- Online -->
-              <div
-                :class="
-                  [
-                    'class-option',
-                    type.implementation === 2 ? 'class-option__active' : '',
-                  ].join(' ')
-                "
-                @click="type.implementation = 2"
-              >
-                <div
-                  :class="
-                    [
-                      'option__check-icon-wrapper',
-                      type.implementation === 2 ? 'option__active' : '',
-                    ].join(' ')
-                  "
-                >
-                  <svg
-                    width="16"
-                    height="14"
-                    viewBox="0 0 16 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      :stroke="
-                        type.implementation === 2 ? '#FFFFFF' : '#1A5543'
-                      "
-                      d="M13 3.37495L6.125 9.56245L3 6.74995"
-                      stroke-width="3"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                <p>Online</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Class type confirmation -->
-          <div class="type-section__program-types-confirmation">
-            <button
-              class="program-types-confirmation__button"
-              @click="getAvailableTime"
-            >
-              Lanjut
-            </button>
-          </div>
+          </template>
         </div>
 
         <!-- Summary -->
@@ -453,6 +475,7 @@
 </template>
 
 <script>
+import { ContentLoader } from 'vue-content-loader'
 import Session from '@/mixins/session'
 import { AlertCircleIcon } from 'vue-feather-icons'
 import ENV from '@/services/env'
@@ -460,6 +483,7 @@ import CourseSchedules from '../components/students/course-options/CourseSchedul
 
 export default {
   components: {
+    ContentLoader,
     AlertCircleIcon,
     CourseSchedules,
   },
@@ -489,6 +513,7 @@ export default {
       },
       selected_schedule: '',
       availableTimes: null,
+      candidateJobType: 99
     }
   },
   computed: {
@@ -504,6 +529,9 @@ export default {
   mounted() {
     // from mixins@Session
     this.setupCurrentSession()
+
+    // Check jobType for candidate
+    this.candidateJobType = parseInt(localStorage.getItem('jt'))
   },
   methods: {
     async candidateRegister() {
