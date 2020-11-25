@@ -1,6 +1,7 @@
 <template>
   <div id="right-side" class="right-side__with-headerbar">
-    <div class="form-pendaftaran md:w-2/3">
+    <div class="form-pendaftaran md:w-2/3 md:pt-6">
+      <h1 class="hidden md:block form-pendaftaran__title">Biodata</h1>
       <FullName v-model="formData.full_name" class="mb-8" />
 
       <Address v-model="formData.address.street_name" />

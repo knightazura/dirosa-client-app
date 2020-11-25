@@ -4,7 +4,12 @@
       <!-- Program types -->
       <div class="form-course-option__type-section">
         <div class="type-section__title">
-          <h1 class="type-section__title-text">Jenis Kelas</h1>
+          <h1 :class="[
+            'type-section__title-text', 
+            type.fillStatus ? 'type-section__finish' : ''
+          ].join(' ')">
+            Jenis Kelas
+          </h1>
           <div
             v-if="type.fillStatus"
             class="type-section__title-status"
@@ -22,7 +27,7 @@
         >
           <ContentLoader v-if="candidateJobType === 99">
             <rect x="0" y="0" rx="3" ry="3" width="300" height="40" />
-            <rect x="0" y="320" rx="3" ry="3" width="280" height="30" />
+            <rect x="0" y="50" rx="3" ry="3" width="280" height="30" />
           </ContentLoader>
           <template v-else>
             <!-- For jobType = 1 -->
@@ -384,89 +389,95 @@
       </div>
 
       <!-- Learning Schedule -->
-      <div class="form-course-option__time-section">
-        <div class="time-section__title">
-          <h1
-            :class="
-              [
-                'time-section__title-text',
-                type.fillStatus ? 'time-section__title-text--active' : '',
-              ].join(' ')
-            "
-          >
-            Jadwal Belajar
-          </h1>
-          <div class="time-section__title-status"></div>
-        </div>
-
-        <!-- Form -->
-        <div
-          v-if="type.fillStatus"
-          :class="
-            ['time-section__form', !type.fillStatus ? 'hidden' : ''].join(' ')
-          "
-        >
-          <!-- Learning Frequency -->
-          <div class="time-section__learning-frequency">
-            <!-- Frequency options -->
-            <div
-              v-for="freq in constants.frequencies"
-              :key="freq"
+      <transition name="slide-up">
+        <div v-if="type.fillStatus" class="form-course-option__time-section">
+          <div class="time-section__title">
+            <h1
               :class="
                 [
-                  'class-option frequency-option',
-                  freq === time.frequency ? 'class-option__active' : '',
+                  'time-section__title-text',
+                  type.fillStatus ? 'time-section__title-text--active' : '',
                 ].join(' ')
               "
-              @click="time.frequency = freq"
             >
-              <div
-                :class="
-                  [
-                    'option__check-icon-wrapper',
-                    freq === time.frequency ? 'option__active' : '',
-                  ].join(' ')
-                "
-              >
-                <svg
-                  width="16"
-                  height="14"
-                  viewBox="0 0 16 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    :stroke="freq === time.frequency ? '#FFFFFF' : '#1A5543'"
-                    d="M13 3.37495L6.125 9.56245L3 6.74995"
-                    stroke-width="3"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
-              <p>{{ freq }} kali/pekan</p>
-            </div>
+              Jadwal Belajar
+            </h1>
+            <div class="time-section__title-status"></div>
           </div>
 
-          <!-- Schedule selector -->
-          <template v-if="availableTimes">
-            <CourseSchedules
-              v-model="selected_schedule"
-              :available-times="availableTimes"
-              :frequency="time.frequency"
-              :implementation="type.implementation"
-            />
-          </template>
-
-          <!-- Register!! -->
-          <button
-            class="time-section__register-button main-button"
-            @click="join"
+          <!-- Form -->
+          <div
+            v-if="type.fillStatus"
+            :class="
+              ['time-section__form', !type.fillStatus ? 'hidden' : ''].join(' ')
+            "
           >
-            Daftar
-          </button>
+            <!-- Learning Frequency -->
+            <div class="time-section__learning-frequency">
+              <!-- Frequency options -->
+              <div
+                v-for="freq in constants.frequencies"
+                :key="freq"
+                :class="
+                  [
+                    'class-option frequency-option',
+                    freq === time.frequency ? 'class-option__active' : '',
+                  ].join(' ')
+                "
+                @click="time.frequency = freq"
+              >
+                <div
+                  :class="
+                    [
+                      'option__check-icon-wrapper',
+                      freq === time.frequency ? 'option__active' : '',
+                    ].join(' ')
+                  "
+                >
+                  <svg
+                    width="16"
+                    height="14"
+                    viewBox="0 0 16 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      :stroke="freq === time.frequency ? '#FFFFFF' : '#1A5543'"
+                      d="M13 3.37495L6.125 9.56245L3 6.74995"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </div>
+                <p>{{ freq }} kali/pekan</p>
+              </div>
+            </div>
+
+            <!-- Schedule selector -->
+            <ContentLoader v-if="loading">
+              <rect x="0" y="0" rx="3" ry="3" width="300" height="40" />
+              <rect x="0" y="50" rx="3" ry="3" width="270" height="40" />
+            </ContentLoader>
+            <template v-else-if="availableTimes && !loading">
+              <CourseSchedules
+                v-model="selected_schedule"
+                :available-times="availableTimes"
+                :frequency="time.frequency"
+                :implementation="type.implementation"
+              />
+            </template>
+
+            <!-- Register!! -->
+            <button
+              class="time-section__register-button main-button"
+              @click="join"
+            >
+              Daftar
+            </button>
+          </div>
         </div>
-      </div>
+      </transition>
 
       <!-- <NuxtLink to="/pengisian-biodata">Pengisian Biodata</NuxtLink>
       <NuxtLink to="/selesai">Daftar!</NuxtLink> -->
@@ -513,7 +524,8 @@ export default {
       },
       selected_schedule: '',
       availableTimes: null,
-      candidateJobType: 99
+      candidateJobType: 99,
+      loading: false,
     }
   },
   computed: {
@@ -558,7 +570,9 @@ export default {
       } catch (e) {}
     },
     async getAvailableTime() {
-      this.type.fillStatus = true
+      this.loading = true;
+
+      if (!this.type.fillStatus) this.type.fillStatus = true;
 
       const options = {
         dpdArea: this.session.c.d_a,
@@ -572,6 +586,7 @@ export default {
       try {
         const availableTimes = await this.$axios.get(url)
         this.availableTimes = availableTimes.data
+        this.loading = false;
       } catch (error) {
         console.log({ error })
         this.$toast.error(
