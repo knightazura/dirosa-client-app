@@ -58,6 +58,7 @@
         @blur="
           liftDownIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })
         ">
+          <option value="" disabled selected hidden>Silakan pilih</option>
           <option 
             v-for="(job, i) in jobList" 
             :key="i" 
