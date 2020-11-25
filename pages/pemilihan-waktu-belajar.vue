@@ -103,10 +103,16 @@
               v-if="type.activeClass === 1"
               class="type-section__classical-info"
             >
-              <alert-circle-icon
-                class="mr-2 text-orange-500"
-              ></alert-circle-icon>
-              <span>Minimal 5 orang/kelas.</span>
+              <div class="classical-info__price">
+                Rp 150,000/bulan
+              </div>
+              <div class="classical-info__class-requirement">
+                <alert-circle-icon
+                  size="1.5x"
+                  class="mr-2 text-orange-500"
+                ></alert-circle-icon>
+                <span>Minimal 5 orang/kelas.</span>
+              </div>
             </div>
           </transition>
 
@@ -116,7 +122,15 @@
             class="type-section__private-option-wrapper"
           >
             <!-- Individu option -->
-            <div class="private-class-option" @click="type.activeClass = 2">
+            <div
+              @click="type.activeClass = 2"
+              :class="
+                [
+                  'private-class-option',
+                  type.activeClass === 2 ? 'private-class-option__selected' : ''
+                ].join(' ')
+                "
+              >
               <div class="private-class-option__icon-wrapper">
                 <div
                   :class="
@@ -153,7 +167,15 @@
             </div>
 
             <!-- Family option -->
-            <div class="private-class-option" @click="type.activeClass = 3">
+            <div
+              @click="type.activeClass = 3"
+              :class="
+                [
+                  'private-class-option',
+                  type.activeClass === 3 ? 'private-class-option__selected' : ''
+                ].join(' ')
+                "
+              >
               <div class="private-class-option__icon-wrapper">
                 <div
                   :class="
@@ -190,7 +212,15 @@
             </div>
 
             <!-- Individu option -->
-            <div class="private-class-option" @click="type.activeClass = 4">
+            <div
+              @click="type.activeClass = 4"
+              :class="
+                [
+                  'private-class-option',
+                  type.activeClass === 4 ? 'private-class-option__selected' : ''
+                ].join(' ')
+                "
+              >
               <div class="private-class-option__icon-wrapper">
                 <div
                   :class="
