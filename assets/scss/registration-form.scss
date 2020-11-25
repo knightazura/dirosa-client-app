@@ -35,7 +35,8 @@
     .form-pendaftaran__select-input {
         #provinsi,
         #kota,
-        #kecamatan {
+        #kecamatan,
+        #pekerjaan {
             @apply rounded px-1 py-2 -mb-4;
             border: 1px solid #909B9D;
 

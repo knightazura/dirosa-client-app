@@ -1,6 +1,6 @@
 <template>
   <div
-    class="md:pl-2 md:w-2/3 lg:ml-4 lg:pl-0 form-pendaftaran__text-input form-pendaftaran__with-icons"
+    class="md:pl-2 md:w-2/3 lg:ml-4 lg:pl-0 form-pendaftaran__select-input form-pendaftaran__with-icons"
   >
     <svg
       id="form-pendaftaran__pen-tool-icon"
@@ -47,31 +47,53 @@
 
     <label for="pekerjaan">
       <span class="label-text">Pekerjaan:</span>
-      <input
+      <select
         id="pekerjaan"
         v-bind="$attrs"
-        :value="value"
-        type="text"
-        class="text-input"
         v-on="inputListeners"
+        @change="setJobType"
         @focus="
           liftUpIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })
         "
         @blur="
           liftDownIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })
-        "
-      />
+        ">
+          <option 
+            v-for="(job, i) in jobList" 
+            :key="i" 
+            :value="job.name">
+              {{ job.name }}
+          </option>
+      </select>
     </label>
   </div>
 </template>
 
 <script>
-import { liftIcons } from '~/mixins/form-icon-animations'
-import { model } from '~/mixins/input-text-model'
+import { liftIcons } from '@/mixins/form-icon-animations'
+import { model } from '@/mixins/input-text-model'
+import env from '@/services/env'
 
 export default {
   mixins: [liftIcons, model],
   props: ['value'],
+  async fetch() {
+    this.jobList = await fetch(env.base_url + '/job-types')
+      .then(res => res.json())
+  },
+  fetchOnServer: true,
+  data() {
+    return {
+      jobList: null
+    }
+  },
+  methods: {
+    setJobType(event) {
+      const selectedJob = this.jobList.find(job => job.name === event.target.value);
+      
+      localStorage.setItem('jt', selectedJob.type);
+    }
+  }
 }
 </script>
 
