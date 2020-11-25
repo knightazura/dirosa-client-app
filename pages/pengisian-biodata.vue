@@ -2,7 +2,11 @@
   <div id="right-side" class="right-side__with-headerbar">
     <div class="form-pendaftaran md:w-2/3 md:pt-6">
       <h1 class="hidden md:block form-pendaftaran__title">Biodata</h1>
-      <FullName v-model="formData.full_name" class="mb-8" />
+      <validation-provider rules="required" v-slot="{ errors }">
+        <FullName v-model="formData.full_name" class="mb-8" />
+        <span>{{ errors[0] }}</span>
+      </validation-provider>
+      
 
       <Address v-model="formData.address.street_name" />
 
@@ -85,6 +89,8 @@
 </template>
 
 <script>
+import { ValidationProvider, extend } from 'vee-validate';
+import { required } from 'vee-validate/dist/rules';
 import { ArrowLeftIcon } from 'vue-feather-icons'
 import Session from '@/mixins/session'
 import ENV from '@/services/env'
@@ -94,6 +100,7 @@ export default {
   components: {
     ...FormComponents,
     ArrowLeftIcon,
+    ValidationProvider
   },
   mixins: [Session],
   data() {
