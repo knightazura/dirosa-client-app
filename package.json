@@ -24,6 +24,7 @@
     "core-js": "^3.6.5",
     "fibers": "^5.0.0",
     "nuxt": "^2.14.6",
+    "vue-content-loader": "^0.2.3",
     "vue-feather-icons": "^5.1.0"
   },
   "devDependencies": {
