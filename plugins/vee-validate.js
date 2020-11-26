@@ -1,7 +1,32 @@
 import { extend } from "vee-validate";
-import { required } from "vee-validate/dist/rules";
+import { email, max, min, numeric, required } from "vee-validate/dist/rules";
 
-extend("required", {
+extend("empty", {
   ...required,
-  message: "This field is required or your custom error message"
+  message: field => field + " tidak boleh kosong"
 });
+
+extend("email", {
+  ...email,
+  message: "Format alamat email tidak sesuai"
+});
+
+extend("numeric", {
+  ...numeric,
+  message: "Hanya bisa diisi dengan angka"
+})
+
+extend("min_generic_name", {
+  ...min,
+  message: (field, { length }) => `Minimal ${length} karakter`
+});
+
+extend("min_phone_number", {
+  ...min,
+  message: "Minimal 10 angka"
+});
+
+extend("max_age", {
+  ...max,
+  message: "Maksimal 2 digit"
+})

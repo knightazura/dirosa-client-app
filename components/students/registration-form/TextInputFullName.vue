@@ -36,22 +36,30 @@
     </svg>
     <label for="nama-lengkap">
       <span class="label-text">Nama Lengkap:</span>
-      <input id="nama-lengkap"
-        v-bind="$attrs"
-        v-bind:value="value"
-        v-on="inputListeners"
-        @focus="liftUpIcon('form-pendaftaran__fullname-icon')"
-        @blur="liftDownIcon('form-pendaftaran__fullname-icon')"
-        type="text"
-        class="text-input" />
+      <validation-provider rules="empty|min_generic_name:3" name="Nama lengkap" v-slot="{ errors }" class="flex flex-col">
+        <input id="nama-lengkap"
+          v-bind="$attrs"
+          v-bind:value="value"
+          v-on="inputListeners"
+          @focus="liftUpIcon('form-pendaftaran__fullname-icon')"
+          @blur="liftDownIcon('form-pendaftaran__fullname-icon')"
+          type="text"
+          class="text-input" />
+          <span v-if="errors.length > 0" class="text-red-600 text-sm font-bold -mb-4">{{ errors[0] }}</span>
+        </validation-provider>
     </label>
   </div>
 </template>
 
 <script>
+import { ValidationProvider, extend } from 'vee-validate';
+import { required } from 'vee-validate/dist/rules';
 import { liftIcons } from '~/mixins/form-icon-animations';
 import { model } from '~/mixins/input-text-model';
 export default {
+  components: {
+    ValidationProvider
+  },
   mixins: [
     liftIcons,
     model

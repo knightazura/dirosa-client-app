@@ -10,12 +10,28 @@ export const state = () => ({
     // joined status
     j: false
   },
+  // biography form status
+  bf: {
+    fn: false, // full name
+    asn: false, // address street name
+    apv: false, // address province
+    act: false, // address city
+    age: false, // age
+    ocp: false, // occupation
+    ead: false, // email address
+    phn: false // phone number
+  }
 })
 
 export const getters = {
   hasBeenRegister(state) {
     return state.s.rg
   },
+  biographyFormValidated(state) {
+    const keys = Object.keys(state.bf)
+
+    return !keys.some(k => state.bg[k] === false)
+  }
 }
 
 export const mutations = {
@@ -35,4 +51,9 @@ export const mutations = {
       }
     )
   },
+  VALIDATE_FORM(state, payload) {
+    const formName = payload.formName
+
+    state[formName][payload.fieldName] = payload.validationValue
+  }
 }

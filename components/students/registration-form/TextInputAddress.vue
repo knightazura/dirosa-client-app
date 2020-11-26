@@ -47,24 +47,31 @@
 
     <label for="alamat">
       <span class="label-text">Alamat:</span>
-      <input
-        id="alamat"
-        v-bind="$attrs"
-        :value="value"
-        type="text"
-        class="text-input -mb-4"
-        v-on="inputListeners"
-        @focus="liftUpIcon('form-pendaftaran__address-icon')"
-        @blur="liftDownIcon('form-pendaftaran__address-icon')"
-      />
+      <validation-provider rules="empty|min_generic_name:6" name="Alamat" v-slot="{ errors }" class="flex flex-col">
+        <input
+          id="alamat"
+          v-bind="$attrs"
+          :value="value"
+          type="text"
+          class="text-input -mb-4"
+          v-on="inputListeners"
+          @focus="liftUpIcon('form-pendaftaran__address-icon')"
+          @blur="liftDownIcon('form-pendaftaran__address-icon')"
+        />
+        <span v-if="errors.length > 0" class="text-red-600 text-sm font-bold mt-4">{{ errors[0] }}</span>
+      </validation-provider>
     </label>
   </div>
 </template>
 
 <script>
+import { ValidationProvider } from 'vee-validate';
 import { liftIcons } from '~/mixins/form-icon-animations'
 import { model } from '~/mixins/input-text-model'
 export default {
+  components: {
+    ValidationProvider
+  },
   mixins: [liftIcons, model],
   props: ['value'],
 }

@@ -41,24 +41,31 @@
 
     <label for="email">
       <span class="label-text">Email:</span>
-      <input
-        id="email"
-        v-bind="$attrs"
-        :value="value"
-        type="text"
-        class="text-input"
-        v-on="inputListeners"
-        @focus="liftUpIcon('form-pendaftaran__email-icon')"
-        @blur="liftDownIcon('form-pendaftaran__email-icon')"
-      />
+      <validation-provider rules="email|empty" name="Alamat email" v-slot="{ errors }" class="flex flex-col">
+        <input
+          id="email"
+          v-bind="$attrs"
+          :value="value"
+          type="text"
+          class="text-input"
+          v-on="inputListeners"
+          @focus="liftUpIcon('form-pendaftaran__email-icon')"
+          @blur="liftDownIcon('form-pendaftaran__email-icon')"
+        />
+        <span v-if="errors.length > 0" class="text-red-600 text-sm font-bold -mb-4">{{ errors[0] }}</span>
+      </validation-provider>
     </label>
   </div>
 </template>
 
 <script>
+import { ValidationProvider, extend } from 'vee-validate';
 import { liftIcons } from '~/mixins/form-icon-animations'
 import { model } from '~/mixins/input-text-model'
 export default {
+  components: {
+    ValidationProvider
+  },
   mixins: [liftIcons, model],
   props: ['value'],
 }

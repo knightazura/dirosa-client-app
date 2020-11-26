@@ -1,95 +1,104 @@
 <template>
   <div id="right-side" class="right-side__with-headerbar">
     <div class="form-pendaftaran md:w-2/3 md:pt-6">
-      <h1 class="hidden md:block form-pendaftaran__title">Biodata</h1>
-      <validation-provider rules="required" v-slot="{ errors }">
-        <FullName v-model="formData.full_name" class="mb-8" />
-        <span>{{ errors[0] }}</span>
-      </validation-provider>
-      
+      <ValidationObserver v-slot="{ invalid }">
+        <h1 class="hidden md:block form-pendaftaran__title">Biodata</h1>
+        <FullName v-model="formData.full_name" />
+        
+        <Address v-model="formData.address.street_name" />
 
-      <Address v-model="formData.address.street_name" />
+        <div class="form-pendaftaran__zone-section w-full">
+          <!-- Provinsi -->
+          <div class="form-pendaftaran__select-input flex-grow lg:w-1/3 lg:pr-2">
+            <label for="provinsi">
+              <span>Provinsi:</span>
+              <validation-provider rules="empty" name="Provinsi" v-slot="{ errors }" class="flex flex-col">
+                <select id="provinsi" v-model="formData.address.province">
+                  <option
+                    v-for="province in provinces"
+                    :key="province.id"
+                    :value="{ id: province.id, name: province.nama }"
+                  >
+                    {{ province.nama }}
+                  </option>
+                </select>
+                <span v-if="errors.length > 0" class="text-red-600 text-sm font-bold mt-4">{{ errors[0] }}</span>
+              </validation-provider>
+            </label>
+          </div>
 
-      <div class="form-pendaftaran__zone-section w-full">
-        <div class="form-pendaftaran__select-input flex-grow lg:w-1/3 lg:pr-2">
-          <label for="provinsi">
-            <span>Provinsi:</span>
-            <select id="provinsi" v-model="formData.address.province">
-              <option
-                v-for="province in provinces"
-                :key="province.id"
-                :value="{ id: province.id, name: province.nama }"
-              >
-                {{ province.nama }}
-              </option>
-            </select>
-          </label>
+          <!-- Kota -->
+          <div class="form-pendaftaran__select-input flex-grow lg:w-1/3 lg:pr-2">
+            <label for="kota">
+              <span>Kota/Kabupaten:</span>
+              <validation-provider rules="empty" name="Kota" v-slot="{ errors }" class="flex flex-col">
+                <select id="kota" v-model="formData.address.city">
+                  <option
+                    v-for="city in cities"
+                    :key="city.id"
+                    :value="{ id: city.id, name: city.nama }"
+                  >
+                    {{ city.nama }}
+                  </option>
+                </select>
+                <span v-if="errors.length > 0" class="text-red-600 text-sm font-bold mt-4">{{ errors[0] }}</span>
+              </validation-provider>
+            </label>
+          </div>
+
+          <!-- Kecamatan -->
+          <div class="form-pendaftaran__select-input flex-grow lg:w-1/3">
+            <label for="kecamatan">
+              <span>Kecamatan:</span>
+              <select id="kecamatan" v-model="formData.address.district">
+                <option
+                  v-for="district in districts"
+                  :key="district.id"
+                  :value="{ id: district.id, name: district.nama }"
+                >
+                  {{ district.nama }}
+                </option>
+              </select>
+            </label>
+          </div>
         </div>
 
-        <!-- Kota -->
-        <div class="form-pendaftaran__select-input flex-grow lg:w-1/3 lg:pr-2">
-          <label for="kota">
-            <span>Kota/Kabupaten:</span>
-            <select id="kota" v-model="formData.address.city">
-              <option
-                v-for="city in cities"
-                :key="city.id"
-                :value="{ id: city.id, name: city.nama }"
-              >
-                {{ city.nama }}
-              </option>
-            </select>
-          </label>
+        <div class="flex flex-col md:flex-row">
+          <CurrentAge v-model="formData.age" />
+          <Occupation v-model="formData.occupation" />
         </div>
 
-        <!-- Kecamatan -->
-        <div class="form-pendaftaran__select-input flex-grow lg:w-1/3">
-          <label for="kecamatan">
-            <span>Kecamatan:</span>
-            <select id="kecamatan" v-model="formData.address.district">
-              <option
-                v-for="district in districts"
-                :key="district.id"
-                :value="{ id: district.id, name: district.nama }"
-              >
-                {{ district.nama }}
-              </option>
-            </select>
-          </label>
+        <div class="flex flex-col md:flex-row">
+          <EmailAddress v-model="formData.email" />
+          <Phonenumber v-model="formData.phone_number" />
         </div>
-      </div>
 
-      <div class="flex flex-col md:flex-row">
-        <CurrentAge v-model="formData.age" />
-        <Occupation v-model="formData.occupation" />
-      </div>
-
-      <div class="flex flex-col md:flex-row">
-        <EmailAddress v-model="formData.email" />
-        <Phonenumber v-model="formData.phone_number" />
-      </div>
-
-      <div class="flex flex-row justify-between md:mt-4">
-        <div class="hidden flex-shrink py-2 md:block">
-          <NuxtLink to="/">
-            <arrow-left-icon></arrow-left-icon>
-          </NuxtLink>
+        <div class="flex flex-row justify-between md:mt-4">
+          <div class="hidden flex-shrink py-2 md:block">
+            <NuxtLink to="/">
+              <arrow-left-icon></arrow-left-icon>
+            </NuxtLink>
+          </div>
+          <button
+            :disabled="invalid"
+            :class="[
+              'form-pendaftaran__join-button',
+              invalid ? 'disabled-button' : 'main-button'
+            ].join(' ')"
+            @click="register"
+          >
+            Selanjutnya
+          </button>
+          <!--        <NuxtLink to="/pemilihan-waktu-belajar">-->
+          <!--        </NuxtLink>-->
         </div>
-        <div
-          class="form-pendaftaran__join-button main-button"
-          @click="register"
-        >
-          Selanjutnya
-        </div>
-        <!--        <NuxtLink to="/pemilihan-waktu-belajar">-->
-        <!--        </NuxtLink>-->
-      </div>
+      </ValidationObserver>
     </div>
   </div>
 </template>
 
 <script>
-import { ValidationProvider, extend } from 'vee-validate';
+import { ValidationProvider, ValidationObserver } from 'vee-validate';
 import { required } from 'vee-validate/dist/rules';
 import { ArrowLeftIcon } from 'vue-feather-icons'
 import Session from '@/mixins/session'
@@ -100,7 +109,8 @@ export default {
   components: {
     ...FormComponents,
     ArrowLeftIcon,
-    ValidationProvider
+    ValidationProvider,
+    ValidationObserver
   },
   mixins: [Session],
   data() {

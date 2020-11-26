@@ -47,35 +47,42 @@
 
     <label for="pekerjaan">
       <span class="label-text">Pekerjaan:</span>
-      <select
-        id="pekerjaan"
-        v-bind="$attrs"
-        v-on="inputListeners"
-        @change="setJobType"
-        @focus="
-          liftUpIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })
-        "
-        @blur="
-          liftDownIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })
-        ">
-          <option value="" disabled selected hidden>Silakan pilih</option>
-          <option 
-            v-for="(job, i) in jobList" 
-            :key="i" 
-            :value="job.name">
-              {{ job.name }}
-          </option>
-      </select>
+      <validation-provider rules="empty" name="Pekerjaan" v-slot="{ errors }" class="flex flex-col">
+        <select
+          id="pekerjaan"
+          v-bind="$attrs"
+          v-on="inputListeners"
+          @change="setJobType"
+          @focus="
+            liftUpIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })
+          "
+          @blur="
+            liftDownIcon('form-pendaftaran__pen-tool-icon', { degree: '-45-deg' })
+          ">
+            <option value="" disabled selected hidden>Silakan pilih</option>
+            <option 
+              v-for="(job, i) in jobList" 
+              :key="i" 
+              :value="job.name">
+                {{ job.name }}
+            </option>
+        </select>
+        <span v-if="errors.length > 0" class="text-red-600 text-sm font-bold mt-4">{{ errors[0] }}</span>
+      </validation-provider>
     </label>
   </div>
 </template>
 
 <script>
+import { ValidationProvider } from 'vee-validate';
 import { liftIcons } from '@/mixins/form-icon-animations'
 import { model } from '@/mixins/input-text-model'
 import env from '@/services/env'
 
 export default {
+  components: {
+    ValidationProvider
+  },
   mixins: [liftIcons, model],
   props: ['value'],
   async fetch() {

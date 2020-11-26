@@ -80,6 +80,7 @@
     }
 
     .form-pendaftaran__join-button {
+        @include basic-button-style;
         @apply flex flex-shrink w-full justify-center p-2 mb-4 cursor-pointer;
 
         @screen md { @apply w-auto mb-0 justify-end }

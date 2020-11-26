@@ -27,5 +27,9 @@
 .right-side__with-headerbar { padding-top: 56px; }
 .right-side__no-headerbar { @apply pt-0 }
 
+.disabled-button {
+    @include basic-button-style;
+    @apply bg-gray-300 border-gray-600 text-gray-500;
+}
 .main-button { @include main-button-style }
 .secondary-button { @include secondary-button-style }
