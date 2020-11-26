@@ -77,29 +77,42 @@
 import { ValidationProvider } from 'vee-validate';
 import { liftIcons } from '@/mixins/form-icon-animations'
 import { model } from '@/mixins/input-text-model'
+import session from '@/mixins/session'
 import env from '@/services/env'
 
 export default {
   components: {
     ValidationProvider
   },
-  mixins: [liftIcons, model],
+  mixins: [liftIcons, model, session],
   props: ['value'],
   async fetch() {
     this.jobList = await fetch(env.base_url + '/job-types')
       .then(res => res.json())
   },
   fetchOnServer: true,
+  mounted() {
+    this.currentSession = this.getSession()
+
+    if (this.currentSession)
+      this.candidateInfo = Object.assign(this.candidateInfo, this.currentSession.c)
+  },
   data() {
     return {
+      currentSession: null,
+      candidateInfo: {},
       jobList: null
     }
   },
   methods: {
     setJobType(event) {
       const selectedJob = this.jobList.find(job => job.name === event.target.value);
+
+      this.candidateInfo = Object.assign(this.candidateInfo, { jt: selectedJob.type })
       
-      localStorage.setItem('jt', selectedJob.type);
+      this.currentSession = Object.assign(this.currentSession, this.candidateInfo)
+
+      localStorage.setItem('session', this.currentSession);
     }
   }
 }

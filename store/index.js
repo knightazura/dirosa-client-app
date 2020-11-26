@@ -6,7 +6,7 @@ export const state = () => ({
     // last page
     lp: 'index',
     // candidate data { id: candidate ID, d_a: DPD area related to their address }
-    c: null,
+    c: {},
     // joined status
     j: false
   },

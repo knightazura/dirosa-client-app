@@ -287,85 +287,105 @@
             <div class="type-section__implementation-option-wrapper">
               <h3 class="implementation-option__title">Pelaksanaan</h3>
 
-              <div class="implementation-options">
-                <!-- Offline -->
-                <div
-                  :class="
-                    [
-                      'class-option',
-                      type.implementation === 1 ? 'class-option__active' : '',
-                    ].join(' ')
-                  "
-                  @click="type.implementation = 1"
-                >
-                  <div
-                    :class="
-                      [
-                        'option__check-icon-wrapper',
-                        type.implementation === 1 ? 'option__active' : '',
-                      ].join(' ')
-                    "
-                  >
-                    <svg
-                      width="16"
-                      height="14"
-                      viewBox="0 0 16 14"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        :stroke="
-                          type.implementation === 1 ? '#FFFFFF' : '#1A5543'
-                        "
-                        d="M13 3.37495L6.125 9.56245L3 6.74995"
-                        stroke-width="3"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <p>Offline</p>
-                </div>
+              <ContentLoader v-if="candidateInfo.eligibleAddress === 99">
+                <rect x="0" y="0" rx="3" ry="3" width="300" height="40" />
+                <rect x="0" y="50" rx="3" ry="3" width="280" height="30" />
+              </ContentLoader>
+              <template v-else>
 
-                <!-- Online -->
-                <div
-                  :class="
-                    [
-                      'class-option',
-                      type.implementation === 2 ? 'class-option__active' : '',
-                    ].join(' ')
-                  "
-                  @click="type.implementation = 2"
-                >
-                  <div
-                    :class="
-                      [
-                        'option__check-icon-wrapper',
-                        type.implementation === 2 ? 'option__active' : '',
-                      ].join(' ')
-                    "
-                  >
-                    <svg
-                      width="16"
-                      height="14"
-                      viewBox="0 0 16 14"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
+                <!-- Eligible address | can be offline -->
+                <template v-if="candidateInfo.eligibleAddress">
+                  <div class="implementation-options">
+                    <!-- Offline -->
+                    <div
+                      :class="
+                        [
+                          'class-option',
+                          type.implementation === 1 ? 'class-option__active' : '',
+                        ].join(' ')
+                      "
+                      @click="type.implementation = 1"
                     >
-                      <path
-                        :stroke="
-                          type.implementation === 2 ? '#FFFFFF' : '#1A5543'
+                      <div
+                        :class="
+                          [
+                            'option__check-icon-wrapper',
+                            type.implementation === 1 ? 'option__active' : '',
+                          ].join(' ')
                         "
-                        d="M13 3.37495L6.125 9.56245L3 6.74995"
-                        stroke-width="3"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
+                      >
+                        <svg
+                          width="16"
+                          height="14"
+                          viewBox="0 0 16 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            :stroke="
+                              type.implementation === 1 ? '#FFFFFF' : '#1A5543'
+                            "
+                            d="M13 3.37495L6.125 9.56245L3 6.74995"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <p>Offline</p>
+                    </div>
+
+                    <!-- Online -->
+                    <div
+                      :class="
+                        [
+                          'class-option',
+                          type.implementation === 2 ? 'class-option__active' : '',
+                        ].join(' ')
+                      "
+                      @click="type.implementation = 2"
+                    >
+                      <div
+                        :class="
+                          [
+                            'option__check-icon-wrapper',
+                            type.implementation === 2 ? 'option__active' : '',
+                          ].join(' ')
+                        "
+                      >
+                        <svg
+                          width="16"
+                          height="14"
+                          viewBox="0 0 16 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            :stroke="
+                              type.implementation === 2 ? '#FFFFFF' : '#1A5543'
+                            "
+                            d="M13 3.37495L6.125 9.56245L3 6.74995"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </div>
+                      <p>Online</p>
+                    </div>
                   </div>
-                  <p>Online</p>
-                </div>
-              </div>
+                </template>
+
+                <!-- Only online -->
+                <template v-else>
+                  <div class="implementation-options">
+                    <div class="w-full p-2 bg-green-100 border border-green-600 rounded shadow mb-2">
+                      <p>Online</p>
+                    </div>
+                  </div>
+                </template>
+
+              </template>
             </div>
 
             <!-- Class type confirmation -->
@@ -492,6 +512,8 @@ import { AlertCircleIcon } from 'vue-feather-icons'
 import ENV from '@/services/env'
 import CourseSchedules from '../components/students/course-options/CourseSchedules'
 
+const ELIGIBLE_CITIES = [3101, 3171, 3172, 3173, 3174, 3175]
+
 export default {
   components: {
     ContentLoader,
@@ -525,6 +547,10 @@ export default {
       selected_schedule: '',
       availableTimes: null,
       candidateJobType: 99,
+      candidateInfo: {
+        jobType: 99,
+        eligibleAddress: 99 // 99: loading, 1: eligible (true), 2: not-eligible (false)
+      },
       loading: false,
     }
   },
@@ -544,6 +570,11 @@ export default {
 
     // Check jobType for candidate
     this.candidateJobType = parseInt(localStorage.getItem('jt'))
+
+    // Check customer current city
+    const candidateCity = parseInt(JSON.parse(localStorage.getItem('session')).c.d_a)
+
+    this.candidateInfo.eligibleAddress = ELIGIBLE_CITIES.some(city => city === candidateCity)
   },
   methods: {
     async candidateRegister() {
