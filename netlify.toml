@@ -1,0 +1,15 @@
+[build.environment]
+  ADMINISTRATION_AREA_API = "https://dev.farizdotid.com/api/daerahindonesia"
+  COURSE_AVAILABLE_TIME = "/available-time"
+  PARTICIPANT_REGISTRATION_URL = "/students"
+  JOIN_URL = "/waiting-list"
+  PROVINCE_URL = "/provinsi"
+  CITY_URL = "/kota?id_provinsi="
+  DISTRICT_URL = "/kecamatan?id_kota="
+  SUBDISTRICT_URL = "/kelurahan?id_kecamatan="
+
+[context.staging.environment] # 'staging' is a branch name
+  BACKEND_BASE_URL = "https://dirosa-backend-api-staging.herokuapp.com"
+
+[context.deploy-preview.environment]
+  BACKEND_BASE_URL = "https://dirosa-backend-api-development.herokuapp.com"
