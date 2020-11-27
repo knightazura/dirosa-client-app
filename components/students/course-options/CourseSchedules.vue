@@ -1,7 +1,7 @@
 <template>
   <div class="time-section__schedule-selector">
+    <h3 class="schedule-selector__title">Pilihan Kelas</h3>
     <div v-if="options.length > 0">
-      <h3 class="schedule-selector__title">Pilihan Kelas</h3>
       <div v-for="(schedules, index) in options[0].schedules" :key="index">
         <div
           :class="[
@@ -18,7 +18,7 @@
               :key="sci"
               :class="
                 [
-                  'item-content',
+                  'item-content cursor-pointer',
                   sci !== schedules.times.length - 1
                     ? 'border-r border-gray-400'
                     : '',
@@ -74,7 +74,7 @@ export default {
     },
     frequencyClasses() {
       return this.frequency === 3 || this.frequency === 2
-        ? `grid grid-cols-${this.frequency} schedule-selector__item`
+        ? `schedule-selector__item-freq-${this.frequency} schedule-selector__item`
         : 'flex flex-col schedule-selector__item'
     },
   },

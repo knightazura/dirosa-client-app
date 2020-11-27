@@ -206,13 +206,13 @@ export default {
   head() {
     return {
       title:
-        "Daftar belajar membaca Al-Qur'an DIROSA - Rumah Qur'an Wahdah Islamiyah Jakarta",
+        "Belajar membaca Al-Qur'an metode DIROSA - Rumah Qur'an Wahdah Islamiyah Jakarta",
       meta: [
         {
           hid: 'description',
           name: 'description',
           content:
-            "Daftar belajar membaca Al-Qur'an untuk orang dewasa metode DIROSA",
+            "Belajar membaca Al-Qur'an untuk orang dewasa dengan metode DIROSA",
         },
       ],
     }

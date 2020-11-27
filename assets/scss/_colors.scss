@@ -12,3 +12,9 @@ $primaryGreenGradientBackground: radial-gradient(
 $mainButtonShadow: 0px 2px 4px rgba(0, 0, 0, 0.25),
 inset 0px -1px 2px rgba(0, 0, 0, 0.15),
 inset 0px 2px 5px rgba(255, 255, 255, 0.07);
+
+.primary-green { color: $primaryGreen; }
+
+@variants hover {
+    .primary-green { color: $primaryGreen }
+}
