@@ -505,9 +505,6 @@
           </div>
         </div>
       </transition>
-
-      <!-- <NuxtLink to="/pengisian-biodata">Pengisian Biodata</NuxtLink>
-      <NuxtLink to="/selesai">Daftar!</NuxtLink> -->
     </div>
   </div>
 </template>
@@ -519,7 +516,7 @@ import { AlertCircleIcon } from 'vue-feather-icons'
 import ENV from '@/services/env'
 import CourseSchedules from '../components/students/course-options/CourseSchedules'
 
-const ELIGIBLE_CITIES = [3101, 3171, 3172, 3173, 3174, 3175]
+const ELIGIBLE_CITIES = [3101, 3171, 3172, 3173, 3174, 3175, 3276]
 
 export default {
   components: {

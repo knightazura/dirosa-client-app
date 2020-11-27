@@ -61,6 +61,9 @@ export default {
     transpile: ["vee-validate/dist/rules"],
   },
 
+  // Page transitions
+  pageTransition: 'slide-up',
+
   server: {
     port: 6700
   },

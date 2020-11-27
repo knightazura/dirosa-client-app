@@ -1,12 +1,13 @@
 @import "colors";
 @import "mixins";
+@import "transitions";
 
 #container {
     @apply flex flex-col;
 
     @screen md {
         display: grid;
-        grid-template-columns: 30% auto;
+        grid-template-columns: minmax(auto, 380px) auto;
     }
 }
 

@@ -1,7 +1,9 @@
 #mobile-header {
     @screen md { @apply hidden }
 
-    @apply fixed flex flex-row w-full bg-white py-2 px-3;
+    @apply fixed flex flex-row w-full py-2 px-3 items-center;
+    background-color: rgba(255, 255, 255, .897);
+    backdrop-filter: blur(2rem);
     border-bottom: 1px solid #EDEDED;
     z-index: 99;
 }
