@@ -48,7 +48,7 @@
     <label for="pekerjaan">
       <span class="label-text">Pekerjaan:</span>
       <validation-provider rules="empty" name="Pekerjaan" v-slot="{ errors }" class="flex flex-col">
-        <select
+        <select v-if="jobList.length > 0"
           id="pekerjaan"
           v-bind="$attrs"
           v-on="inputListeners"
@@ -90,18 +90,20 @@ export default {
     this.jobList = await fetch(env.base_url + '/job-types')
       .then(res => res.json())
   },
-  fetchOnServer: true,
   mounted() {
     this.currentSession = this.getSession()
 
     if (this.currentSession)
       this.candidateInfo = Object.assign(this.candidateInfo, this.currentSession.c)
+
+    if (this.jobList.length === 0)
+      this.$fetch()
   },
   data() {
     return {
       currentSession: null,
       candidateInfo: {},
-      jobList: null
+      jobList: []
     }
   },
   methods: {
