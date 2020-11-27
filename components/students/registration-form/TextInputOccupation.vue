@@ -110,9 +110,11 @@ export default {
 
       this.candidateInfo = Object.assign(this.candidateInfo, { jt: selectedJob.type })
       
-      this.currentSession = Object.assign(this.currentSession, this.candidateInfo)
+      this.currentSession = Object.assign(this.currentSession, { c: this.candidateInfo })
 
-      localStorage.setItem('session', this.currentSession);
+      const cs = JSON.stringify(this.currentSession)
+
+      localStorage.setItem('session', cs);
     }
   }
 }

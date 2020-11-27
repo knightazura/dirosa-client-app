@@ -25,13 +25,13 @@
             ['type-section__form', type.fillStatus ? 'hidden' : ''].join(' ')
           "
         >
-          <ContentLoader v-if="candidateJobType === 99">
+          <ContentLoader v-if="candidateInfo.jobType === 99">
             <rect x="0" y="0" rx="3" ry="3" width="300" height="40" />
             <rect x="0" y="50" rx="3" ry="3" width="280" height="30" />
           </ContentLoader>
           <template v-else>
             <!-- For jobType = 1 -->
-            <template v-if="candidateJobType === 1">
+            <template v-if="candidateInfo.jobType === 1">
               <!-- Class type -->
               <div class="type-section__type-class">
                 <!-- Klasikal option -->
@@ -378,9 +378,16 @@
 
                 <!-- Only online -->
                 <template v-else>
-                  <div class="implementation-options">
+                  <div class="implementation-options implementation-options__online-only">
                     <div class="w-full p-2 bg-green-100 border border-green-600 rounded shadow mb-2">
                       <p>Online</p>
+                    </div>
+                    <div class="implementation-option__info-outside-area">
+                      <alert-circle-icon
+                        size="1.5x"
+                        class="mr-2 text-orange-500"
+                      ></alert-circle-icon>
+                      <span>Peserta diluar DKI Jakarta & Depok hanya online</span>
                     </div>
                   </div>
                 </template>
@@ -523,6 +530,7 @@ export default {
   mixins: [Session],
   data() {
     return {
+      session: {},
       constants: {
         className: {
           1: 'Klasikal',
@@ -546,18 +554,12 @@ export default {
       },
       selected_schedule: '',
       availableTimes: null,
-      candidateJobType: 99,
       candidateInfo: {
         jobType: 99,
         eligibleAddress: 99 // 99: loading, 1: eligible (true), 2: not-eligible (false)
       },
       loading: false,
     }
-  },
-  computed: {
-    session() {
-      return this.getSession()
-    },
   },
   watch: {
     'time.frequency'(selectedFrequency) {
@@ -567,14 +569,17 @@ export default {
   mounted() {
     // from mixins@Session
     this.setupCurrentSession()
+    this.session = this.getSession()
 
-    // Check jobType for candidate
-    this.candidateJobType = parseInt(localStorage.getItem('jt'))
+    // Check candidate job type
+    this.candidateInfo.jobType = parseInt(this.session.c.jt)
 
-    // Check customer current city
-    const candidateCity = parseInt(JSON.parse(localStorage.getItem('session')).c.d_a)
-
+    // Check candidate current city
+    const candidateCity = parseInt(this.session.c.d_a)
     this.candidateInfo.eligibleAddress = ELIGIBLE_CITIES.some(city => city === candidateCity)
+
+    if (!this.candidateInfo.eligibleAddress)
+      this.type.implementation = 2
   },
   methods: {
     async candidateRegister() {

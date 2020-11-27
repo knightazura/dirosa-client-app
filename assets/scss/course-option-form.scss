@@ -1,3 +1,7 @@
+@mixin special-info-notification {
+    @apply flex items-center text-xs;
+}
+
 .form-course-option {
     @screen md {
         @apply mx-auto mt-6 p-0;
@@ -50,7 +54,7 @@
             @apply border rounded p-2 mb-2 font-bold;
             @include item-selector-selected;
         }
-        .classical-info__class-requirement { @apply flex items-center text-xs }
+        .classical-info__class-requirement { @include special-info-notification() }
     }
 
 
@@ -74,14 +78,16 @@
 
 
     .type-section__implementation-option-wrapper {
-        @apply flex flex-col mt-3;
+        @apply flex flex-col mt-4;
 
-        h3.implementation-option__title {
-            @apply font-bold;
-        }
+        h3.implementation-option__title { @apply font-bold mb-2 }
 
-        .implementation-options {
-            @apply flex flex-row;
+        .implementation-options { @apply flex flex-row }
+
+        .implementation-options__online-only {
+            @apply flex-col;
+            
+            .implementation-option__info-outside-area { @include special-info-notification() }
         }
     }
 

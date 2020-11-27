@@ -152,13 +152,20 @@ export default {
           this.formData
         )
         if (response.status === 201) {
-          // from mixins@Session
-          this.commitSession({
-            rg: true,
-            c: {
+          const currentSession = this.getSession()
+
+          let candidateInfo = Object.assign(
+            {
               id: response.data.candidate.id,
               d_a: response.data.candidate.dpd_area,
             },
+            currentSession.c
+          );
+
+          // from mixins@Session
+          this.commitSession({
+            rg: true,
+            c: candidateInfo,
           })
 
           this.$nuxt.$loading.finish()
