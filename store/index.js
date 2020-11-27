@@ -27,6 +27,9 @@ export const getters = {
   hasBeenRegister(state) {
     return state.s.rg
   },
+  hasBeenJoined(state) {
+    return state.s.j
+  },
   biographyFormValidated(state) {
     const keys = Object.keys(state.bf)
 
