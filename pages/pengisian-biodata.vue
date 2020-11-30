@@ -1,6 +1,6 @@
 <template>
   <div id="right-side" class="right-side__with-headerbar">
-    <div class="form-pendaftaran md:w-2/3 md:pt-6">
+    <div class="form-pendaftaran md:pt-6">
       <ValidationObserver v-slot="{ invalid }">
         <h1 class="hidden md:block form-pendaftaran__title">Biodata</h1>
         <FullName v-model="formData.full_name" />
@@ -93,6 +93,7 @@
           <!--        </NuxtLink>-->
         </div>
       </ValidationObserver>
+      <div>&nbsp;</div>
     </div>
   </div>
 </template>

@@ -16,13 +16,17 @@
     @screen md {
         @apply flex flex-grow justify-center p-0;
         max-height: 100vh;
-        overflow-y: auto;
+        overflow-y: scroll;
     }
 
-  @screen xl { max-width: 900px }
+    .landing-page-container {
+        @apply flex flex-col justify-center items-center;
+        max-width: 800px;
+        
+        @screen md { @apply w-3/4 mt-6 mx-auto justify-start items-start }
 
-
-    .landing-page-container { @apply flex flex-col w-full justify-center items-center }
+        @media (min-width: 1650px) { @apply mx-0 }
+    }
 }
 
 .right-side__with-headerbar { padding-top: 56px; }
