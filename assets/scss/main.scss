@@ -12,7 +12,7 @@
 }
 
 #right-side {
-    @apply px-3;
+    @apply px-4;
     @screen md {
         @apply flex flex-grow justify-center p-0;
         max-height: 100vh;
