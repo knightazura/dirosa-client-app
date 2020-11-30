@@ -116,7 +116,7 @@
                   class="type-section__classical-info"
                 >
                   <div class="classical-info__price">
-                    Rp 150,000/bulan
+                    Mulai dari 95.000,00/bulan
                   </div>
                   <div class="classical-info__class-requirement">
                     <alert-circle-icon
@@ -173,7 +173,7 @@
                   <div class="private-class-option__content">
                     <p class="private-class-option__text">Individu</p>
                     <p class="private-class-option__description">
-                      Biaya Rp 1,750,000
+                      Mulai dari Rp1.750.000,00
                     </p>
                   </div>
                 </div>
@@ -218,7 +218,7 @@
                   <div class="private-class-option__content">
                     <p class="private-class-option__text">Keluarga</p>
                     <p class="private-class-option__description">
-                      Biaya Rp 4,500,000 (maksimal 9 orang)
+                      Mulai dari Rp4.500.000,00 (maksimal 9 orang)
                     </p>
                   </div>
                 </div>
@@ -263,7 +263,7 @@
                   <div class="private-class-option__content">
                     <p class="private-class-option__text">Anak - anak</p>
                     <p class="private-class-option__description">
-                      Biaya Rp 100,000/bulan
+                      Mulai dari Rp100.000,00/bulan
                     </p>
                   </div>
                 </div>
@@ -401,7 +401,7 @@
                 class="program-types-confirmation__button"
                 @click="getAvailableTime"
               >
-                Lanjut
+                Selanjutnya
               </button>
             </div>
           </template>
