@@ -11,5 +11,8 @@
 [context.staging.environment] # 'staging' is a branch name
   BACKEND_BASE_URL = "https://dirosa-backend-api-staging.herokuapp.com"
 
+[context.development.environment] # 'development' is a branch name
+  BACKEND_BASE_URL = "https://dirosa-backend-api-development.herokuapp.com"
+
 [context.deploy-preview.environment]
   BACKEND_BASE_URL = "https://dirosa-backend-api-development.herokuapp.com"
