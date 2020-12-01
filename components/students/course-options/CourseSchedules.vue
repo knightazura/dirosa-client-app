@@ -70,6 +70,7 @@ export default {
   data() {
     return {
       selectedSchedule: null,
+      selectedAvailableTime: null
     }
   },
   computed: {
@@ -80,9 +81,10 @@ export default {
     },
   },
   methods: {
-    setSelectedSchedule(id) {
-      this.selectedSchedule = id
-      this.$emit('click', id)
+    setSelectedSchedule(schedule_id, available_time_id) {
+      this.selectedSchedule = schedule_id
+      this.selectedAvailableTime = available_time_id
+      this.$emit('click', { schedule_id, available_time_id })
     },
   },
 }
