@@ -497,7 +497,11 @@
 
             <!-- Register!! -->
             <button
-              class="time-section__register-button main-button"
+              :disabled="!selected_schedule"
+              :class="[
+                'time-section__register-button',
+                !selected_schedule ? 'disabled-button' : 'main-button'
+              ].join(' ')"
               @click="join"
             >
               Daftar
@@ -561,6 +565,7 @@ export default {
   watch: {
     'time.frequency'(selectedFrequency) {
       this.getAvailableTime()
+      this.selected_schedule = ''
     },
   },
   mounted() {
@@ -637,9 +642,6 @@ export default {
           }
         )
       }
-    },
-    setClassType(type) {
-      this.type.activeClass = type
     },
     async join() {
       this.$nuxt.$loading.start()
