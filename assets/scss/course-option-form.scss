@@ -72,6 +72,8 @@
                 @apply flex flex-col;
 
                 .private-class-option__text { @apply font-bold }
+
+                .private-class-option__description { @apply text-sm }
             }
         }
 
@@ -99,7 +101,7 @@
             @screen md { @apply px-2 py-4 }
         }
 
-        .frequency-option { @apply my-1 }
+        .frequency-option { @apply flex my-1 items-center }
 
         .class-option__active {
             box-shadow: 0 2px 7px rgba(0,0,0,.11);
@@ -182,6 +184,11 @@
         .time-section__register-button { @apply flex-grow font-bold py-2 mb-4 }
     }
 
+
+.covid-19-announcement {
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.493), rgb(141, 223, 255)),
+        url('~assets/images/covid-19-illustr.jpeg');
+}
 
 
 
