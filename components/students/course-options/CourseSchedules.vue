@@ -1,6 +1,6 @@
 <template>
   <div class="time-section__schedule-selector">
-    <h3 class="schedule-selector__title">Pilihan Kelas</h3>
+    <h3 class="schedule-selector__title">Pilihan Waktu</h3>
     <div v-if="availableTimes.length > 0">
       <div v-for="availableTime in availableTimes" :key="availableTime.id" class="border-b border-gray-200">
         <div v-if="implementation === 1" class="-mb-2 mt-2 flex flex-row text-xs">

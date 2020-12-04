@@ -116,7 +116,7 @@
                   class="type-section__classical-info"
                 >
                   <div class="classical-info__price">
-                    Mulai dari 95.000,00/bulan
+                    Mulai dari Rp95.000/bulan
                   </div>
                   <div class="classical-info__class-requirement">
                     <alert-circle-icon
@@ -173,7 +173,7 @@
                   <div class="private-class-option__content">
                     <p class="private-class-option__text">Individu</p>
                     <p class="private-class-option__description">
-                      Mulai dari Rp1.750.000,00
+                      Mulai dari Rp1.500.000
                     </p>
                   </div>
                 </div>
@@ -215,10 +215,13 @@
                     </div>
                   </div>
 
-                  <div class="private-class-option__content">
-                    <p class="private-class-option__text">Keluarga</p>
+                  <div class="private-class-option__content w-full pr-2">
+                    <p class="private-class-option__text flex flex-row items-center">
+                      <span class="flex-grow">Keluarga</span>
+                      <span class="flex-shrink text-xs font-bold bg-orange-600 px-1 rounded text-white">Maks. 9 orang</span>
+                    </p>
                     <p class="private-class-option__description">
-                      Mulai dari Rp4.500.000,00 (maksimal 9 orang)
+                      Mulai dari Rp3.750.000
                     </p>
                   </div>
                 </div>
@@ -263,7 +266,7 @@
                   <div class="private-class-option__content">
                     <p class="private-class-option__text">Anak - anak</p>
                     <p class="private-class-option__description">
-                      Mulai dari Rp100.000,00/bulan
+                      Mulai dari Rp50.000/bulan
                     </p>
                   </div>
                 </div>
@@ -293,103 +296,114 @@
               </ContentLoader>
               <template v-else>
 
-                <!-- Eligible address | can be offline -->
-                <template v-if="candidateInfo.eligibleAddress">
-                  <div class="implementation-options">
-                    <!-- Offline -->
-                    <div
-                      :class="
-                        [
-                          'class-option',
-                          type.implementation === 1 ? 'class-option__active' : '',
-                        ].join(' ')
-                      "
-                      @click="type.implementation = 1"
-                    >
-                      <div
-                        :class="
-                          [
-                            'option__check-icon-wrapper',
-                            type.implementation === 1 ? 'option__active' : '',
-                          ].join(' ')
-                        "
-                      >
-                        <svg
-                          width="16"
-                          height="14"
-                          viewBox="0 0 16 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            :stroke="
-                              type.implementation === 1 ? '#FFFFFF' : '#1A5543'
-                            "
-                            d="M13 3.37495L6.125 9.56245L3 6.74995"
-                            stroke-width="3"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <p>Offline</p>
-                    </div>
-
-                    <!-- Online -->
-                    <div
-                      :class="
-                        [
-                          'class-option',
-                          type.implementation === 2 ? 'class-option__active' : '',
-                        ].join(' ')
-                      "
-                      @click="type.implementation = 2"
-                    >
-                      <div
-                        :class="
-                          [
-                            'option__check-icon-wrapper',
-                            type.implementation === 2 ? 'option__active' : '',
-                          ].join(' ')
-                        "
-                      >
-                        <svg
-                          width="16"
-                          height="14"
-                          viewBox="0 0 16 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            :stroke="
-                              type.implementation === 2 ? '#FFFFFF' : '#1A5543'
-                            "
-                            d="M13 3.37495L6.125 9.56245L3 6.74995"
-                            stroke-width="3"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          />
-                        </svg>
-                      </div>
-                      <p>Online</p>
+                <!-- Special for covid-19 outbreak -->
+                <template v-if="covid19">
+                  <div class="implementation-options implementation-options__online-only">
+                    <div class="covid-19-announcement w-full p-2 border border-blue-600 rounded mb-2">
+                      <p>Mohon maaf</p>
+                      <p>Selama pandemi COVID-19, kegiatan kita hanya dilaksanakan secara online.</p>
                     </div>
                   </div>
                 </template>
-
-                <!-- Only online -->
                 <template v-else>
-                  <div class="implementation-options implementation-options__online-only">
-                    <div class="w-full p-2 bg-green-100 border border-green-600 rounded shadow mb-2">
-                      <p>Online</p>
+                  <!-- Eligible address | can be offline -->
+                  <template v-if="candidateInfo.eligibleAddress">
+                    <div class="implementation-options">
+                      <!-- Offline -->
+                      <div
+                        :class="
+                          [
+                            'class-option',
+                            type.implementation === 1 ? 'class-option__active' : '',
+                          ].join(' ')
+                        "
+                        @click="type.implementation = 1"
+                      >
+                        <div
+                          :class="
+                            [
+                              'option__check-icon-wrapper',
+                              type.implementation === 1 ? 'option__active' : '',
+                            ].join(' ')
+                          "
+                        >
+                          <svg
+                            width="16"
+                            height="14"
+                            viewBox="0 0 16 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              :stroke="
+                                type.implementation === 1 ? '#FFFFFF' : '#1A5543'
+                              "
+                              d="M13 3.37495L6.125 9.56245L3 6.74995"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </div>
+                        <p>Offline</p>
+                      </div>
+
+                      <!-- Online -->
+                      <div
+                        :class="
+                          [
+                            'class-option',
+                            type.implementation === 2 ? 'class-option__active' : '',
+                          ].join(' ')
+                        "
+                        @click="type.implementation = 2"
+                      >
+                        <div
+                          :class="
+                            [
+                              'option__check-icon-wrapper',
+                              type.implementation === 2 ? 'option__active' : '',
+                            ].join(' ')
+                          "
+                        >
+                          <svg
+                            width="16"
+                            height="14"
+                            viewBox="0 0 16 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              :stroke="
+                                type.implementation === 2 ? '#FFFFFF' : '#1A5543'
+                              "
+                              d="M13 3.37495L6.125 9.56245L3 6.74995"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            />
+                          </svg>
+                        </div>
+                        <p>Online</p>
+                      </div>
                     </div>
-                    <div class="implementation-option__info-outside-area">
-                      <alert-circle-icon
-                        size="1.5x"
-                        class="mr-2 text-orange-500"
-                      ></alert-circle-icon>
-                      <span>Peserta diluar DKI Jakarta & Depok hanya online</span>
+                  </template>
+
+                  <!-- Only online -->
+                  <template v-else>
+                    <div class="implementation-options implementation-options__online-only">
+                      <div class="w-full p-2 bg-green-100 border border-green-600 rounded shadow mb-2">
+                        <p>Online</p>
+                      </div>
+                      <div class="implementation-option__info-outside-area">
+                        <alert-circle-icon
+                          size="1.5x"
+                          class="mr-2 text-orange-500"
+                        ></alert-circle-icon>
+                        <span>Peserta diluar DKI Jakarta & Depok hanya online</span>
+                      </div>
                     </div>
-                  </div>
+                  </template>
                 </template>
 
               </template>
@@ -398,7 +412,7 @@
             <!-- Class type confirmation -->
             <div class="type-section__program-types-confirmation">
               <button
-                class="program-types-confirmation__button"
+                class="program-types-confirmation__button w-full mb-4"
                 @click="getAvailableTime"
               >
                 Selanjutnya
@@ -443,7 +457,7 @@
             <div class="time-section__learning-frequency">
               <!-- Frequency options -->
               <div
-                v-for="freq in constants.frequencies"
+                v-for="(freq, fqi) in constants.frequencies"
                 :key="freq"
                 :class="
                   [
@@ -477,7 +491,8 @@
                     />
                   </svg>
                 </div>
-                <p>{{ freq }} kali/pekan</p>
+                <p class="flex-grow">{{ freq }} kali/pekan</p>
+                <p class="flex-shrink text-sm">{{ constants.prices[type.activeClass][fqi] }}/bulan</p>
               </div>
             </div>
 
@@ -544,6 +559,12 @@ export default {
           2: 'Online',
         },
         frequencies: [1, 2, 3],
+        prices: {
+          1: ['Rp95.000/bulan', 'Rp125.000/bulan', 'Rp150.000/bulan'],
+          2: ['Rp1.250.000', 'Rp1.500.000', 'Rp1.750.000'],
+          3: ['Rp3.750.000', 'Rp4.250.000', 'Rp4.500.000'],
+          4: ['Rp50.000/bulan', 'Rp80.000/bulan', 'Rp100.000/bulan']
+        }
       },
       type: {
         activeClass: 1, // 1: Klasikal, 2: Individu (Private), 3: Family (Private), 4. Children (Private)
@@ -560,6 +581,7 @@ export default {
         eligibleAddress: 99 // 99: loading, 1: eligible (true), 2: not-eligible (false)
       },
       loading: false,
+      covid19: false
     }
   },
   watch: {
@@ -580,7 +602,7 @@ export default {
     const candidateCity = parseInt(this.session.c.d_a)
     this.candidateInfo.eligibleAddress = ELIGIBLE_CITIES.some(city => city === candidateCity)
 
-    if (!this.candidateInfo.eligibleAddress)
+    if (!this.candidateInfo.eligibleAddress || this.covid19)
       this.type.implementation = 2
   },
   methods: {
