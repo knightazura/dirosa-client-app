@@ -492,7 +492,7 @@
                   </svg>
                 </div>
                 <p class="flex-grow">{{ freq }} kali/pekan</p>
-                <p class="flex-shrink text-sm">{{ constants.prices[type.activeClass][fqi] }}/bulan</p>
+                <p class="flex-shrink text-sm">{{ constants.prices[type.activeClass][fqi] }}</p>
               </div>
             </div>
 
@@ -581,7 +581,7 @@ export default {
         eligibleAddress: 99 // 99: loading, 1: eligible (true), 2: not-eligible (false)
       },
       loading: false,
-      covid19: false
+      covid19: true
     }
   },
   watch: {
