@@ -52,7 +52,7 @@
       </div>
     </div>
     <div v-else class="time-section__schedule-selector schedule--full">
-      <p>Mohon maaf. Semua kelas sudah penuh.</p>
+      <p>Mohon maaf. Belum ada kelas untuk jadwal ini atau kelas sudah penuh</p>
     </div>
   </div>
 </template>
