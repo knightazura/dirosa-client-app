@@ -6,7 +6,7 @@
       </div>
       <div class="stimulus-section mt-4 mb-2">
         <p class="leading-relaxed mb-2">Bagi anda yang saat ini belum bisa membaca Al-Qur’an atau ingin memperbaiki kualitas bacaan, kami mempunyai solusi untuk anda.</p>
-        <p>DIROSA, program belajar membaca Al-Qur’an khusus untuk orang dewasa. Daftarkan diri anda sekarang!</p>
+        <p>DIROSA, program belajar membaca Al-Qur’an khusus untuk orang dewasa. <nuxt-link class="text-green-700" to="/pengisian-biodata">Daftarkan diri anda sekarang!</nuxt-link></p>
       </div>
       <div class="method-introduction-section my-2">
         <h3 class="method-introduction--title font-bold text-2xl mb-2">Apa itu DIROSA?</h3>
