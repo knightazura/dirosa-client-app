@@ -43,5 +43,9 @@ export default {
       })
     }
   },
+  beforeDestroy() {
+    let rs = document.getElementById('right-side');
+    rs.removeEventListener('click', ev => console.log("DIROSA app closed"))
+  }
 }
 </script>
