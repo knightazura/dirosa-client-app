@@ -64,6 +64,11 @@ export default {
   // Page transitions
   pageTransition: 'slide-up',
 
+  // Router
+  router: {
+    middleware: 'history-on-localstorage'
+  },
+
   server: {
     port: 6700
   },

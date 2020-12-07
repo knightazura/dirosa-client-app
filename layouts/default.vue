@@ -33,6 +33,15 @@ export default {
     ) {
       this.$nuxt.$router.push('/pemilihan-waktu-belajar')
     }
+
+    if (process.browser) {
+      let _ = this;
+      let rs = document.getElementById('right-side');
+
+      rs.addEventListener('click', ev => {
+        _.$store.commit('OPEN_MAIN_MENU', false);
+      })
+    }
   },
 }
 </script>

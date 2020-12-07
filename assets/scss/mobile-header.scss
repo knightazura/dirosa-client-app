@@ -1,9 +1,18 @@
 #mobile-header {
     @screen md { @apply hidden }
 
-    @apply fixed flex flex-row w-full py-2 px-3 items-center;
+    @apply fixed w-full py-2 px-3;
     background-color: rgba(255, 255, 255, .897);
     backdrop-filter: blur(2rem);
     border-bottom: 1px solid #EDEDED;
     z-index: 99;
+    
+    .main-menu-wrapper { @apply flex items-center }
+
+    .more-menu-wrapper {
+        transition: all .33s ease;
+        overflow-y: hidden;
+    }
+        .more-menu-wrapper__active { height: max-content; }
+        .more-menu-wrapper__hidden { height: 0; }
 }

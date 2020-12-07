@@ -84,7 +84,7 @@
         <phone-icon size="21" class="stroke-2 mr-3"></phone-icon> Hubungi Kami
       </div>
       <div class="button-faq">
-        <button class="main-button py-2 px-6 focus:outline-none">FAQ</button>
+        <nuxt-link to="/faq" class="main-button py-2 px-6 focus:outline-none">FAQ</nuxt-link>
       </div>
     </div>
   </aside>

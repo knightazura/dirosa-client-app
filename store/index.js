@@ -20,6 +20,14 @@ export const state = () => ({
     ocp: false, // occupation
     ead: false, // email address
     phn: false // phone number
+  },
+  // route
+  rot: {
+    pv: '/'
+  },
+  // mobile main menu state
+  mmms: {
+    opened: false
   }
 })
 
@@ -34,6 +42,12 @@ export const getters = {
     const keys = Object.keys(state.bf)
 
     return !keys.some(k => state.bg[k] === false)
+  },
+  previousRoute(state) {
+    return state.rot.pv;
+  },
+  mainMenuOpened(state) {
+    return state.mmms.opened;
   }
 }
 
@@ -58,5 +72,21 @@ export const mutations = {
     const formName = payload.formName
 
     state[formName][payload.fieldName] = payload.validationValue
+  },
+  SET_PREVIOUS_ROUTE(state, payload) {
+    localStorage.setItem('pr', payload);
+    state.rot.pv = payload;
+  },
+  OPEN_MAIN_MENU(state, payload) {
+    state.mmms.opened = payload;
+  }
+}
+
+export const actions  = {
+  getPreviousRouteFromLS({ commit }) {
+    let pvRoute = localStorage.getItem('pr');
+
+    if (pvRoute)
+      commit('SET_PREVIOUS_ROUTE', pvRoute);
   }
 }
