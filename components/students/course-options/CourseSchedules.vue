@@ -64,9 +64,6 @@ export default {
     event: 'click',
   },
   props: ['availableTimes', 'frequency', 'implementation', 'hidden'],
-  mounted() {
-    console.log(this.availableTimes)
-  },
   data() {
     return {
       selectedSchedule: null,
