@@ -1,7 +1,7 @@
 <template>
   <aside id="sidebar">
     <h1 class="px-5 py-6 font-bold text-xl text-white">
-      Rumah Qur'an Wahdah Islamiyah Jakarta Selatan
+      Rumah Qur'an Wahdah Islamiyah Jakarta
     </h1>
     <div class="text-white px-5 py-2">
       <ul>
