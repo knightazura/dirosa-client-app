@@ -62,9 +62,13 @@ export default {
       return this.$store.getters['mainMenuOpened'];
     }
   },
+  watch: {
+    $route (to, from) {
+      this.$store.commit('OPEN_MAIN_MENU', false);
+    }
+  },
   methods: {
     goTo(url) {
-      this.showMoreMenu = false;
       this.$router.push(url);
     },
     openMenu(state) {
