@@ -29,8 +29,8 @@
     }
 
 
-    .temporary-joinied-status {
-        @apply w-full rounded p-4;
+    .tmpjs-class-info {
+        @apply flex justify-center w-full rounded p-2 mb-2;
         background: rgb(34,193,195);
         background: linear-gradient(34deg, rgba(34,193,195,1) 0%, rgba(0,217,156,1) 100%);
     }
