@@ -41,6 +41,11 @@ const session = {
       }
     )
   },
+  computed: {
+    hasBeenJoined() {
+      return this.$store.getters['hasBeenJoined'];
+    }
+  },
   methods: {
     checkSession(session) {
       return Object.is(session, null)

@@ -27,6 +27,13 @@
 
         @media (min-width: 1650px) { @apply mx-0 }
     }
+
+
+    .temporary-joinied-status {
+        @apply w-full rounded p-4;
+        background: rgb(34,193,195);
+        background: linear-gradient(34deg, rgba(34,193,195,1) 0%, rgba(0,217,156,1) 100%);
+    }
 }
 
 .right-side__with-headerbar { padding-top: 56px; }

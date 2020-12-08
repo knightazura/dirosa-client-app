@@ -1,10 +1,13 @@
 <template>
   <div id="right-side" class="right-side__with-headerbar">
+    <div v-if="hasBeenJoined && !Object.is(candidate, null)" class="temporary-joinied-status mb-2">
+      <h1 class="text-xl font-bold">{{ candidate.full_name }}</h1>
+    </div>
     <div class="landing-page-container">
-      <div class="w-3/4 md:w-1/2 mx-auto">
+      <div v-if="!hasBeenJoined" class="w-3/4 md:w-1/2 mx-auto">
         <welcome-illustration></welcome-illustration>
       </div>
-      <div class="stimulus-section mt-4 mb-2">
+      <div v-if="!hasBeenJoined" class="stimulus-section mt-4 mb-2">
         <p class="leading-relaxed mb-2">Bagi anda yang saat ini belum bisa membaca Al-Qur’an atau ingin memperbaiki kualitas bacaan, kami mempunyai solusi untuk anda.</p>
         <p>DIROSA, program belajar membaca Al-Qur’an khusus untuk orang dewasa. <nuxt-link class="text-green-700" to="/pengisian-biodata">Daftarkan diri anda sekarang!</nuxt-link></p>
       </div>
@@ -27,25 +30,49 @@
           <li>Sangat cocok bagi pemula maupun yang sudah bisa membaca Al-Qur’an</li>
         </ol>
       </div>
-      <NuxtLink class="main-button px-3 p-2 my-2" to="/pengisian-biodata">Daftar Sekarang</NuxtLink>
+      <NuxtLink v-if="!hasBeenJoined" class="main-button px-3 p-2 my-2" to="/pengisian-biodata">Daftar Sekarang</NuxtLink>
+      <button v-else @click="newRegister" class="main-button px-3 p-2 my-2">Daftar Baru</button>
       <div>&nbsp;</div>
     </div>
   </div>
 </template>
 
 <script>
+import { ContentLoader } from 'vue-content-loader'
 import ENV from '@/services/env'
 import Session from '@/mixins/session'
 import WelcomeIllustration from '@/components/landing-page/welcome-illustration'
 
 export default {
   components: {
+    ContentLoader,
     WelcomeIllustration,
   },
   mixins: [Session],
-  mounted() {
+  async mounted() {
     // from mixins@Session
     this.setupCurrentSession()
+
+    if (this.hasBeenJoined) {
+      const currentSession = this.getSession()
+      const candidateInfo = await this.$axios.get(`${ENV.base_url}/cad/${currentSession.c.id}`)
+
+      this.candidate = candidateInfo.data
+    }
   },
+  data() {
+    return {
+      loading: false,
+      candidate: null
+    }
+  },
+  methods: {
+    newRegister() {
+      // from mixins@Session
+      this.clearSession()
+
+      this.$router.push('/pengisian-biodata')
+    }
+  }
 }
 </script>

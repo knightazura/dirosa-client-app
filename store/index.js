@@ -1,3 +1,8 @@
+const setSessionLS = state => {
+  const session = JSON.stringify(state)
+  localStorage.setItem('session', session)
+}
+
 export const state = () => ({
   // session
   s: {
@@ -64,9 +69,12 @@ export const mutations = {
       {
         rg: false,
         lp: 'index',
-        c: null,
+        c: {},
+        j: false
       }
     )
+
+    setSessionLS(state.s);
   },
   VALIDATE_FORM(state, payload) {
     const formName = payload.formName
