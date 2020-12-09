@@ -80,7 +80,7 @@
       </ul>
     </div>
     <div class="flex flex-col lg:flex-row">
-      <div class="contact-us">
+      <div class="contact-us cursor-pointer" @click="openCSWhatsApp">
         <phone-icon size="21" class="stroke-2 mr-3"></phone-icon> Hubungi Kami
       </div>
       <div class="button-faq">
@@ -92,6 +92,7 @@
 
 <script>
 import { CircleIcon, PhoneIcon } from 'vue-feather-icons'
+import { customerServiceWhatsApp } from '@/mixins/open-external-services'
 import CheckCircle from '../icons/CheckCircle'
 import CircleItem from './CircleItem'
 
@@ -113,6 +114,7 @@ const ROUTE_NAMES = [
 ]
 
 export default {
+  mixins: [customerServiceWhatsApp],
   components: {
     CheckCircle,
     CircleIcon,
