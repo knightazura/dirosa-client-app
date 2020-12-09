@@ -87,8 +87,19 @@ export default {
   mixins: [liftIcons, model, session],
   props: ['value'],
   async fetch() {
-    this.jobList = await fetch(env.base_url + '/job-types')
-      .then(res => res.json())
+    try {
+      this.jobList = await fetch(env.base_url + '/job-types')
+        .then(res => res.json())
+    } catch (error) {
+      console.log(error)
+      this.jobList = [
+        { type: 1, name: 'Pegawai Negeri' },
+        { type: 1, name: 'Pegawai Swasta' },
+        { type: 1, name: 'Wirausaha' },
+        { type: 0, name: 'Mahasiswa' },
+        { type: 0, name: 'Pelajar SD/SMP/SMA' },
+      ]
+    }
   },
   mounted() {
     this.currentSession = this.getSession()
