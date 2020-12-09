@@ -5,7 +5,8 @@
 <script>
 export default {
   created() {
-    localStorage.setItem('referral_code', this.$route.params.referral)
+    if(process.browser)
+      localStorage.setItem('referral_code', this.$route.params.referral)
 
     this.$router.push('/')
   }
