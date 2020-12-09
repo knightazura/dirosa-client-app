@@ -147,6 +147,13 @@ export default {
       let age = parseInt(this.formData.age)
       this.formData.age = age;
 
+      if (process.browser) {
+        let referral_code = localStorage.getItem('referral_code')
+
+        if (referral_code)
+          this.formData.referrer = referral_code
+      }
+
       try {
         const response = await this.$axios.post(
           ENV.participant.registrationUrl,
