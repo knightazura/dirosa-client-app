@@ -27,6 +27,22 @@
 
         @media (min-width: 1650px) { @apply mx-0 }
     }
+
+
+    .temporary-joinied-status {
+        @apply flex flex-col justify-center;
+        max-width: 800px;
+        
+        @screen md { @apply w-3/4 mt-6 mx-auto justify-start items-start }
+
+        @media (min-width: 1650px) { @apply mx-0 }
+
+        .tmpjs-class-info {
+            @apply flex justify-center w-full rounded p-2 mb-2;
+            background: rgb(34,193,195);
+            background: linear-gradient(34deg, rgba(34,193,195,1) 0%, rgba(0,217,156,1) 100%);
+        }
+    }
 }
 
 .right-side__with-headerbar { padding-top: 56px; }

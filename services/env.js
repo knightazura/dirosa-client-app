@@ -14,4 +14,5 @@ export default {
     districts: AREA_ADMINISTRATION + process.env.DISTRICT_URL,
     subDistricts: AREA_ADMINISTRATION + process.env.SUBDISTRICT_URL,
   },
+  cs_number: process.env.CS_NUMBER,
 }

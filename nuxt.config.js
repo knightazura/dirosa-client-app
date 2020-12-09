@@ -83,5 +83,6 @@ export default {
     CITY_URL: process.env.CITY_URL,
     DISTRICT_URL: process.env.DISTRICT_URL,
     SUBDISTRICT_URL: process.env.SUBDISTRICT_URL,
+    CS_NUMBER: process.env.CS_NUMBER,
   }
 }

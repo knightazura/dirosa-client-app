@@ -21,18 +21,18 @@
       <ol>
         <li v-if="$route.name === 'faq'" class="mt-2 py-2 border-t" @click="goTo('/')">Halaman Utama</li>
         <li v-if="$route.name !== 'faq'" class="mt-2 py-2 border-t" @click="goTo('/faq')">FAQ</li>
-        <li class="pt-2 border-t">
-          <a href="https://wa.me/6282296731729" target="_new">Hubungi Kami</a>
-        </li>
+        <li class="pt-2 border-t" @click="openCSWhatsApp">Hubungi Kami</li>
       </ol>
     </div>
   </div>
 </template>
 
 <script>
+import { customerServiceWhatsApp } from '@/mixins/open-external-services'
 import { ArrowLeftIcon, MenuIcon, XIcon } from 'vue-feather-icons'
 
 export default {
+  mixins: [customerServiceWhatsApp],
   components: {
     ArrowLeftIcon,
     MenuIcon,

@@ -38,14 +38,18 @@ export default {
       let _ = this;
       let rs = document.getElementById('right-side');
 
-      rs.addEventListener('click', ev => {
-        _.$store.commit('OPEN_MAIN_MENU', false);
-      })
+      if (rs) {
+        rs.addEventListener('click', ev => {
+          _.$store.commit('OPEN_MAIN_MENU', false);
+        })
+      }
     }
   },
   beforeDestroy() {
     let rs = document.getElementById('right-side');
-    rs.removeEventListener('click', ev => console.log("DIROSA app closed"))
+
+    if (rs)
+      rs.removeEventListener('click', ev => console.log("DIROSA app closed")) 
   }
 }
 </script>
