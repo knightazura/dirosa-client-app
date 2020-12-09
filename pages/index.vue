@@ -50,7 +50,6 @@
           </div>
           <p class="mt-4 text-center">Bagikan link dibawah</p>
           <p class="mt-1 p-2 bg-orange-200 text-orange-700 font-bold text-center">{{ candidate.referral_url }}</p>
-          <nuxt-link to="/cad-sg/nyLw90">Coba</nuxt-link>
         </div>
       </div>
 
