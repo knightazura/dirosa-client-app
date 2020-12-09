@@ -492,7 +492,7 @@
                   </svg>
                 </div>
                 <p class="flex-grow">{{ freq }} kali/pekan</p>
-                <p class="flex-shrink text-sm">{{ constants.prices[type.activeClass][fqi] }}</p>
+                <p v-if="candidateInfo.jobType === 1" class="flex-shrink text-sm">{{ constants.prices[type.activeClass][fqi] }}</p>
               </div>
             </div>
 
