@@ -107,11 +107,6 @@ export default {
 
     if (this.hasBeenJoined) {
       const currentSession = this.getSession()
-<<<<<<< HEAD
-      const candidateInfo = await this.$axios.get(`${ENV.base_url}/cad/${currentSession.c.id}`)
-
-      this.candidate = candidateInfo.data
-=======
       try {
         const candidateInfo = await this.$axios.get(`${ENV.base_url}/cad/${currentSession.c.id}`)
         this.candidate = candidateInfo.data
@@ -121,7 +116,6 @@ export default {
         // re-setup
         this.setupCurrentSession()
       }
->>>>>>> development
     }
     this.loading = false
   },
