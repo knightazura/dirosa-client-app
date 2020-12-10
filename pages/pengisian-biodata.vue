@@ -1,6 +1,6 @@
 <template>
   <div id="right-side" class="right-side__with-headerbar">
-    <div class="form-pendaftaran md:w-2/3 md:pt-6">
+    <div class="form-pendaftaran md:pt-6">
       <ValidationObserver v-slot="{ invalid }">
         <h1 class="hidden md:block form-pendaftaran__title">Biodata</h1>
         <FullName v-model="formData.full_name" />
@@ -93,6 +93,7 @@
           <!--        </NuxtLink>-->
         </div>
       </ValidationObserver>
+      <div>&nbsp;</div>
     </div>
   </div>
 </template>
@@ -146,19 +147,33 @@ export default {
       let age = parseInt(this.formData.age)
       this.formData.age = age;
 
+      if (process.browser) {
+        let referral_code = localStorage.getItem('referral_code')
+
+        if (referral_code)
+          this.formData.referrer = referral_code
+      }
+
       try {
         const response = await this.$axios.post(
           ENV.participant.registrationUrl,
           this.formData
         )
         if (response.status === 201) {
-          // from mixins@Session
-          this.commitSession({
-            rg: true,
-            c: {
+          const currentSession = this.getSession()
+
+          let candidateInfo = Object.assign(
+            {
               id: response.data.candidate.id,
               d_a: response.data.candidate.dpd_area,
             },
+            currentSession.c
+          );
+
+          // from mixins@Session
+          this.commitSession({
+            rg: true,
+            c: candidateInfo,
           })
 
           this.$nuxt.$loading.finish()

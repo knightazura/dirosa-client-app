@@ -33,6 +33,23 @@ export default {
     ) {
       this.$nuxt.$router.push('/pemilihan-waktu-belajar')
     }
+
+    if (process.browser) {
+      let _ = this;
+      let rs = document.getElementById('right-side');
+
+      if (rs) {
+        rs.addEventListener('click', ev => {
+          _.$store.commit('OPEN_MAIN_MENU', false);
+        })
+      }
+    }
   },
+  beforeDestroy() {
+    let rs = document.getElementById('right-side');
+
+    if (rs)
+      rs.removeEventListener('click', ev => console.log("DIROSA app closed")) 
+  }
 }
 </script>

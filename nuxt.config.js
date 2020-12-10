@@ -4,11 +4,15 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'dirosa-app',
+    title: 'Belajar membaca Al-Qur\'an untuk orang dewasa - DIROSA',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'DIROSA (Dirasah Orang Dewasa) merupakan metode belajar membaca Al-Qur\'an khusus bagi orang dewasa yang belum bisa membaca sama sekali, yang dikelola secara sitematis, berjenjang dan berlangsung terus-menerus. Daftar untuk belajar sekarang!'
+      },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
@@ -61,6 +65,14 @@ export default {
     transpile: ["vee-validate/dist/rules"],
   },
 
+  // Page transitions
+  pageTransition: 'slide-up',
+
+  // Router
+  router: {
+    middleware: 'history-on-localstorage'
+  },
+
   server: {
     port: 6700
   },
@@ -75,5 +87,6 @@ export default {
     CITY_URL: process.env.CITY_URL,
     DISTRICT_URL: process.env.DISTRICT_URL,
     SUBDISTRICT_URL: process.env.SUBDISTRICT_URL,
+    CS_NUMBER: process.env.CS_NUMBER,
   }
 }

@@ -1,4 +1,51 @@
 const session = {
+  async mounted() {
+    let vm = this
+    // has been registered?
+    this.$store.watch(
+      function (state, getters) {
+        return getters.hasBeenRegister
+      },
+      function (newValue) {
+        if (newValue && vm.$route.name === 'pengisian-biodata') {
+          vm.$nuxt.$router.push('/pemilihan-waktu-belajar')
+        }
+
+        if (!newValue && vm.$route.name === 'pemilihan-waktu-belajar') {
+          vm.$nuxt.$router.push('/pengisian-biodata')
+        }
+      },
+      {
+        immediate: true
+      }
+    )
+
+    // has been joined?
+    this.$store.watch(
+      function (state, getters) {
+        return getters.hasBeenJoined
+      },
+      function (newValue) {
+        if (
+          newValue &&
+          (
+            vm.$route.name === 'pengisian-biodata' ||
+            vm.$route.name === 'pemilihan-waktu-belajar'
+          )
+        ) {
+          vm.$nuxt.$router.push('/selesai')
+        }
+      },
+      {
+        immediate: true
+      }
+    )
+  },
+  computed: {
+    hasBeenJoined() {
+      return this.$store.getters['hasBeenJoined'];
+    }
+  },
   methods: {
     checkSession(session) {
       return Object.is(session, null)

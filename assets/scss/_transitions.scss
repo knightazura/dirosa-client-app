@@ -1,0 +1,29 @@
+/* Transition animation classes */
+.no-mode-fade-enter-active, .no-mode-fade-leave-active {
+    transition: opacity .17s
+}
+.no-mode-fade-enter-from, .no-mode-fade-leave-to {
+    opacity: 0
+}
+
+// Slide up & fade
+.slide-up-enter-active,
+.slide-fade-enter-active {
+    transition: all .3s ease;
+}
+
+.slide-up-leave-active,
+.slide-fade-leave-active {
+    transition: all .2357s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter, .slide-fade-leave-to
+    /* .slide-fade-leave-active below version 2.1.8 */ {
+    transform: translateX(10px);
+    opacity: 0;
+}
+
+.slide-up-enter, .slide-up-leave-to {
+    transform: translateY(10px);
+    opacity: 0;
+}

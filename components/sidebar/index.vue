@@ -1,7 +1,7 @@
 <template>
   <aside id="sidebar">
     <h1 class="px-5 py-6 font-bold text-xl text-white">
-      Rumah Qur'an Wahdah Islamiyah Jakarta Selatan
+      Rumah Qur'an Wahdah Islamiyah Jakarta
     </h1>
     <div class="text-white px-5 py-2">
       <ul>
@@ -80,11 +80,11 @@
       </ul>
     </div>
     <div class="flex flex-col lg:flex-row">
-      <div class="contact-us">
+      <div class="contact-us cursor-pointer" @click="openCSWhatsApp">
         <phone-icon size="21" class="stroke-2 mr-3"></phone-icon> Hubungi Kami
       </div>
       <div class="button-faq">
-        <button class="main-button py-2 px-6 focus:outline-none">FAQ</button>
+        <nuxt-link to="/faq" class="main-button py-2 px-6 focus:outline-none">FAQ</nuxt-link>
       </div>
     </div>
   </aside>
@@ -92,6 +92,7 @@
 
 <script>
 import { CircleIcon, PhoneIcon } from 'vue-feather-icons'
+import { customerServiceWhatsApp } from '@/mixins/open-external-services'
 import CheckCircle from '../icons/CheckCircle'
 import CircleItem from './CircleItem'
 
@@ -113,6 +114,7 @@ const ROUTE_NAMES = [
 ]
 
 export default {
+  mixins: [customerServiceWhatsApp],
   components: {
     CheckCircle,
     CircleIcon,

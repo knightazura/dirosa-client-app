@@ -1,8 +1,14 @@
+@mixin special-info-notification {
+    @apply flex items-center text-xs;
+}
+
 .form-course-option {
     @screen md {
         @apply mx-auto mt-6 p-0;
         width: 80%;
     }
+
+    @screen xl { width: 800px }
 }
 
 // Flex column
@@ -50,7 +56,7 @@
             @apply border rounded p-2 mb-2 font-bold;
             @include item-selector-selected;
         }
-        .classical-info__class-requirement { @apply flex items-center text-xs }
+        .classical-info__class-requirement { @include special-info-notification() }
     }
 
 
@@ -66,6 +72,8 @@
                 @apply flex flex-col;
 
                 .private-class-option__text { @apply font-bold }
+
+                .private-class-option__description { @apply text-sm }
             }
         }
 
@@ -74,14 +82,16 @@
 
 
     .type-section__implementation-option-wrapper {
-        @apply flex flex-col mt-3;
+        @apply flex flex-col mt-4;
 
-        h3.implementation-option__title {
-            @apply font-bold;
-        }
+        h3.implementation-option__title { @apply font-bold mb-2 }
 
-        .implementation-options {
-            @apply flex flex-row;
+        .implementation-options { @apply flex flex-row }
+
+        .implementation-options__online-only {
+            @apply flex-col;
+            
+            .implementation-option__info-outside-area { @include special-info-notification() }
         }
     }
 
@@ -91,7 +101,7 @@
             @screen md { @apply px-2 py-4 }
         }
 
-        .frequency-option { @apply my-1 }
+        .frequency-option { @apply flex my-1 items-center }
 
         .class-option__active {
             box-shadow: 0 2px 7px rgba(0,0,0,.11);
@@ -143,7 +153,8 @@
 
 
     .time-section__form {
-        @apply flex flex-col;
+        @apply flex flex-col w-full;
+        margin-bottom: 4.5rem;
 
         .time-section__learning-frequency { @apply flex flex-col }
 
@@ -154,6 +165,7 @@
 
           .schedule-selector__item {
             @apply py-1 my-3 border border-gray-400 rounded;
+            transition: all .17s ease-in-out;
 
             .item-content {
               @apply flex flex-col px-1 text-center;
@@ -170,32 +182,26 @@
 
         .schedule--full { @apply px-3 py-4 justify-center items-center }
 
-        .time-section__register-button { @apply flex-grow rounded bg-green-700 text-white font-bold py-2 mb-4 }
+        .time-section__register-button {
+            @apply fixed bottom-0 font-bold py-2 mx-auto mb-4;
+            width: calc(100% - 2rem);
+<<<<<<< HEAD
+=======
+
+            @screen md { @apply relative w-full }
+>>>>>>> development
+        }
     }
 
 
-
-
-.slide-up-enter-active,
-.slide-fade-enter-active {
-    transition: all .3s ease;
+.covid-19-announcement {
+    background:
+        linear-gradient(to left, rgba(255, 255, 255, 0.493), rgb(141, 223, 255)),
+        no-repeat url('~assets/images/covid-19-illustr.jpeg');
+    background-size: cover;
 }
 
-.slide-up-leave-active,
-.slide-fade-leave-active {
-    transition: all .2357s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
 
-.slide-fade-enter, .slide-fade-leave-to
-    /* .slide-fade-leave-active below version 2.1.8 */ {
-    transform: translateX(10px);
-    opacity: 0;
-}
-
-.slide-up-enter, .slide-up-leave-to {
-    transform: translateY(10px);
-    opacity: 0;
-}
 
 
 // Variants

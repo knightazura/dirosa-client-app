@@ -19,6 +19,8 @@
 .form-pendaftaran {
     @apply flex flex-col;
 
+    @screen xl { width: 800px }
+
     h1.form-pendaftaran__title {
         @apply mb-2;
         font-size: 1.35rem;

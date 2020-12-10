@@ -48,7 +48,7 @@
     <label for="pekerjaan">
       <span class="label-text">Pekerjaan:</span>
       <validation-provider rules="empty" name="Pekerjaan" v-slot="{ errors }" class="flex flex-col">
-        <select
+        <select v-if="jobList.length > 0"
           id="pekerjaan"
           v-bind="$attrs"
           v-on="inputListeners"
@@ -87,21 +87,34 @@ export default {
   mixins: [liftIcons, model, session],
   props: ['value'],
   async fetch() {
-    this.jobList = await fetch(env.base_url + '/job-types')
-      .then(res => res.json())
+    try {
+      this.jobList = await fetch(env.base_url + '/job-types')
+        .then(res => res.json())
+    } catch (error) {
+      console.log(error)
+      this.jobList = [
+        { type: 1, name: 'Pegawai Negeri' },
+        { type: 1, name: 'Pegawai Swasta' },
+        { type: 1, name: 'Wirausaha' },
+        { type: 0, name: 'Mahasiswa' },
+        { type: 0, name: 'Pelajar SD/SMP/SMA' },
+      ]
+    }
   },
-  fetchOnServer: true,
   mounted() {
     this.currentSession = this.getSession()
 
     if (this.currentSession)
       this.candidateInfo = Object.assign(this.candidateInfo, this.currentSession.c)
+
+    if (this.jobList.length === 0)
+      this.$fetch()
   },
   data() {
     return {
       currentSession: null,
       candidateInfo: {},
-      jobList: null
+      jobList: []
     }
   },
   methods: {
@@ -110,9 +123,11 @@ export default {
 
       this.candidateInfo = Object.assign(this.candidateInfo, { jt: selectedJob.type })
       
-      this.currentSession = Object.assign(this.currentSession, this.candidateInfo)
+      this.currentSession = Object.assign(this.currentSession, { c: this.candidateInfo })
 
-      localStorage.setItem('session', this.currentSession);
+      const cs = JSON.stringify(this.currentSession)
+
+      localStorage.setItem('session', cs);
     }
   }
 }

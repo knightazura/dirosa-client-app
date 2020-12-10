@@ -1,27 +1,48 @@
 @import "colors";
 @import "mixins";
+@import "transitions";
 
 #container {
     @apply flex flex-col;
 
     @screen md {
         display: grid;
-        grid-template-columns: 30% auto;
+        grid-template-columns: minmax(auto, 380px) auto;
     }
 }
 
 #right-side {
-    @apply px-3;
+    @apply px-4;
     @screen md {
         @apply flex flex-grow justify-center p-0;
         max-height: 100vh;
-        overflow-y: auto;
+        overflow-y: scroll;
     }
 
-  @screen xl { max-width: 900px }
+    .landing-page-container {
+        @apply flex flex-col justify-center items-center;
+        max-width: 800px;
+        
+        @screen md { @apply w-3/4 mt-6 mx-auto justify-start items-start }
+
+        @media (min-width: 1650px) { @apply mx-0 }
+    }
 
 
-    .landing-page-container { @apply flex flex-col w-full justify-center items-center }
+    .temporary-joinied-status {
+        @apply flex flex-col justify-center;
+        max-width: 800px;
+        
+        @screen md { @apply w-3/4 mt-6 mx-auto justify-start items-start }
+
+        @media (min-width: 1650px) { @apply mx-0 }
+
+        .tmpjs-class-info {
+            @apply flex justify-center w-full rounded p-2 mb-2;
+            background: rgb(34,193,195);
+            background: linear-gradient(34deg, rgba(34,193,195,1) 0%, rgba(0,217,156,1) 100%);
+        }
+    }
 }
 
 .right-side__with-headerbar { padding-top: 56px; }
