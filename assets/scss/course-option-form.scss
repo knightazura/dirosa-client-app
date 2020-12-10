@@ -185,11 +185,8 @@
         .time-section__register-button {
             @apply fixed bottom-0 font-bold py-2 mx-auto mb-4;
             width: calc(100% - 2rem);
-<<<<<<< HEAD
-=======
 
             @screen md { @apply relative w-full }
->>>>>>> development
         }
     }
 

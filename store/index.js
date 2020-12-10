@@ -82,7 +82,9 @@ export const mutations = {
     state[formName][payload.fieldName] = payload.validationValue
   },
   SET_PREVIOUS_ROUTE(state, payload) {
-    localStorage.setItem('pr', payload);
+    if(process.browser)
+      localStorage.setItem('pr', payload);
+    
     state.rot.pv = payload;
   },
   OPEN_MAIN_MENU(state, payload) {
