@@ -41,7 +41,7 @@
 
     <label for="email">
       <span class="label-text">Email:</span>
-      <validation-provider rules="email|empty" name="Alamat email" v-slot="{ errors }" class="flex flex-col">
+      <validation-provider rules="email" name="Alamat email" v-slot="{ errors }" class="flex flex-col">
         <input
           id="email"
           v-bind="$attrs"
